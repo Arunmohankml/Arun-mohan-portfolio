@@ -1,0 +1,672 @@
+/* ==========================================================================
+   Make-A-Ton 9.0 · base: tokens, reset, shared components
+   ========================================================================== */
+
+:root {
+  /* Brand palette (palette.png) */
+  --yellow: #FCC230;
+  --purple: #AD69FF;
+  --blue: #4080FB;
+  --pink: #F57EB4;
+  --green: #22AC5F;
+  --red: #EF4225;
+  --cream: #F2E3D0;
+  --ink: #0C0E0F;
+  --white: #FFFFFF;
+
+  /* Hero mockup (mainpage.png) */
+  --tape: #FFE23A;
+  --gold: #FBD900;
+  --star-pink: #FA5C94;
+  --tape-shadow: #A6A6A6;
+  --paper: #FFF8EE;
+
+  /* Hero page stock: the sheet the comic panels are printed on */
+  --hero-page: #FBC93E;
+  --hero-page-lit: #FFE071;
+  --hero-page-shade: #F0AC16;
+
+  --font-display: "Bangers", Impact, "Arial Narrow", sans-serif;
+  --font-tape: "Titan One", "Arial Black", system-ui, sans-serif;
+  --font-body: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --line: 3px;
+  --radius: 22px;
+  --shadow: 8px 8px 0 var(--ink);
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: 1180px;
+
+  /* Decorative marks, as masks so any colour can be applied */
+  --star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 2C54 34 66 46 98 50C66 54 54 66 50 98C46 66 34 54 2 50C34 46 46 34 50 2Z'/%3E%3C/svg%3E");
+  --squiggle-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 445 444'%3E%3Cdefs%3E%3Cpath id='q' d='M16 62C16 80 26 90 40 90C62 90 64 36 86 36C108 36 112 90 134 90C156 90 160 36 182 36C204 36 206 90 228 90C242 90 252 80 252 62'/%3E%3C/defs%3E%3Cg fill='none' stroke='%23000' stroke-width='32' stroke-linecap='round' stroke-linejoin='round'%3E%3Cuse href='%23q' x='260' y='85'/%3E%3Cuse href='%23q' x='-185' y='85'/%3E%3Cuse href='%23q' x='37' y='307'/%3E%3C/g%3E%3C/svg%3E");
+  --asterisk-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3Cpath id='a' d='M0-44V44M-44 0H44M-31-31L31 31M-31 31L31-31'/%3E%3C/defs%3E%3Cg stroke='%23000' stroke-width='17'%3E%3Cuse href='%23a' transform='translate(72 76) rotate(8)'/%3E%3Cuse href='%23a' transform='translate(190 170) rotate(24) scale(.82)'/%3E%3Cuse href='%23a' transform='translate(318 96) rotate(-14) scale(.9)'/%3E%3Cuse href='%23a' transform='translate(116 306) rotate(34) scale(.86)'/%3E%3Cuse href='%23a' transform='translate(300 300) rotate(12) scale(1.05)'/%3E%3C/g%3E%3C/svg%3E");
+  --swoosh: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 30' preserveAspectRatio='none'%3E%3Cpath d='M3 21C60 13 150 8 296 5C300 5 300 11 296 12C180 17 90 23 9 28C1 29 0 22 3 21Z'/%3E%3C/svg%3E");
+  /* The wavy seam edge: one tile of a hand-drawn wave, filling everything
+     above the curve so it can be masked over the sheet colour (480x80) */
+  --seam-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='80' viewBox='0 0 480 80'%3E%3Cpath d='M0,30C36,30,50,58,86,58C120,58,134,26,168,26C202,26,216,50,250,50C284,50,298,18,332,18C366,18,380,56,414,56C442,56,452,30,480,30L480,0L0,0Z'/%3E%3C/svg%3E");
+}
+
+/* Reset ------------------------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--ink);
+}
+main { display: block; overflow-x: clip; background: var(--white); }
+::selection { color: var(--white); background: var(--ink); }
+img, svg { display: block; max-width: 100%; }
+/* <picture> only picks the file format; the <img> stays the layout box */
+picture { display: contents; }
+h1, h2, h3, p, ol, ul { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.nowrap { white-space: nowrap; }
+
+.skip-link {
+  position: fixed;
+  top: 12px; left: 12px;
+  z-index: 100;
+  padding: 10px 16px;
+  font-weight: 700;
+  background: var(--tape);
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  transform: translateY(-160%);
+}
+.skip-link:focus { transform: none; }
+
+/* Buttons ------------------------------------------------------------------ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: 0.6em 1.25em;
+  font-family: var(--font-tape);
+  font-size: 1rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  background: var(--tape);
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 4px 4px 0 var(--ink);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+.btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
+.btn[aria-disabled="true"] { background: var(--cream); cursor: not-allowed; }
+.btn[aria-disabled="true"]:hover,
+.btn[aria-disabled="true"]:active { transform: none; box-shadow: 4px 4px 0 var(--ink); }
+.btn--big { font-size: clamp(1.1rem, 1rem + 0.6vw, 1.5rem); padding: 0.75em 1.6em; box-shadow: 6px 6px 0 var(--ink); }
+
+/* Type --------------------------------------------------------------------- */
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3rem, 1.6rem + 5.6vw, 6.4rem);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: var(--white);
+  -webkit-text-stroke: 0.09em var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 0.05em 0.07em 0 var(--ink);
+}
+.display--yellow { color: var(--tape); }
+.display--panel { font-size: clamp(2.6rem, 1.2rem + 3.9vw, 4.8rem); }
+
+/* Section scaffolding ------------------------------------------------------ */
+.section {
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(44px, 4.5vw, 68px) clamp(52px, 5.5vw, 80px);
+  scroll-margin-top: 84px;
+}
+.section__inner {
+  position: relative;
+  width: min(calc(100% - 2 * var(--gutter)), var(--max));
+  margin-inline: auto;
+}
+.section__inner--narrow { --max: 860px; }
+.section-head {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  margin-bottom: clamp(20px, 2.4vw, 30px);
+}
+.section-head--center { justify-items: center; text-align: center; }
+
+/* Cards -------------------------------------------------------------------- */
+.card {
+  padding: clamp(20px, 2.4vw, 32px);
+  background: var(--paper);
+  border: var(--line) solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.card--cream { background: var(--cream); }
+.card--white { background: var(--white); }
+.card__title {
+  margin-bottom: 0.6em;
+  font-family: var(--font-tape);
+  font-size: clamp(1.4rem, 1.2rem + 1vw, 2rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+.card p + p { margin-top: 1em; }
+
+/* Tape --------------------------------------------------------------------- */
+.tape {
+  --tape-bg: var(--tape);
+  --tape-star: var(--ink);
+  --tape-h: clamp(48px, 4.6vw, 96px);
+  --tilt: -2deg;
+  position: absolute;
+  left: -10%;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  width: 120%;
+  height: var(--tape-h);
+  overflow: hidden;
+  font-family: var(--font-tape);
+  font-size: calc(var(--tape-h) * 0.39);
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--ink);
+  background: var(--tape-bg);
+  border-block: max(3px, 0.25vw) solid var(--ink);
+  box-shadow: 0 max(6px, 0.56vw) 0 var(--tape-shadow);
+  transform: translateY(-50%) rotate(var(--tilt));
+  pointer-events: none;
+  user-select: none;
+}
+.tape--white { --tape-bg: var(--white); }
+.tape--tilt-right { --tilt: 2deg; }
+.tape--divider { top: 0; }
+.tape--divider + .section__inner { padding-top: clamp(8px, 1vw, 16px); }
+
+.tape__track {
+  display: flex;
+  flex: none;
+  width: max-content;
+  animation: tape-scroll var(--tape-speed, 70s) linear infinite;
+}
+.tape[data-reverse] .tape__track { animation-direction: reverse; }
+.tape__group { display: flex; flex: none; }
+.tape__item { display: flex; align-items: center; }
+.tape__item::after {
+  content: "";
+  flex: none;
+  width: 0.8em;
+  height: 0.8em;
+  margin-inline: 0.78em;
+  background: var(--tape-star);
+  -webkit-mask: var(--star) center / contain no-repeat;
+  mask: var(--star) center / contain no-repeat;
+}
+@keyframes tape-scroll { to { transform: translateX(-50%); } }
+
+.no-js .tape::before {
+  content: attr(data-tape) "  ✦  " attr(data-tape) "  ✦  " attr(data-tape) "  ✦  " attr(data-tape) "  ✦  " attr(data-tape);
+  padding-left: 1em;
+}
+
+/* Background patterns ------------------------------------------------------ */
+.pattern::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--pattern-color, var(--ink));
+  /* Both axes: the tile SVGs carry only a viewBox, so an `auto` height resolves
+     against the element and stretches the tile on very tall or narrow blocks. */
+  -webkit-mask: var(--pattern-img) 0 0 / var(--pattern-size) var(--pattern-size) repeat;
+  mask: var(--pattern-img) 0 0 / var(--pattern-size) var(--pattern-size) repeat;
+}
+.pattern--squiggle { --pattern-img: var(--squiggle-tile); --pattern-size: max(150px, 13.73vw); }
+.pattern--asterisk { --pattern-img: var(--asterisk-tile); --pattern-size: max(240px, 24vw); }
+
+.sunburst {
+  background: repeating-conic-gradient(from 0deg at 50% 42%, var(--ray-a) 0deg 7.5deg, var(--ray-b) 7.5deg 15deg);
+}
+.sunburst--yellow { --ray-a: var(--gold); --ray-b: #FFE55C; }
+.sunburst--red { --ray-a: var(--red); --ray-b: #F8683F; }
+
+
+/* Stickers (traced shapes from the insois sheet) ---------------------------- */
+.sticker {
+  position: relative;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+.sticker > img,
+.sticker > span { grid-area: 1 / 1; }
+.sticker > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(6px 6px 0 var(--ink));
+}
+.sticker > span {
+  position: relative;
+  padding: 12%;
+  font-family: var(--font-tape);
+  font-size: clamp(1rem, 0.8rem + 0.9vw, 1.6rem);
+  line-height: 1.02;
+  text-transform: uppercase;
+  color: var(--white);
+  text-shadow: 2px 2px 0 var(--ink);
+}
+
+/* Comic Mascot Peeker & Corner Characters ---------------------------------- */
+.mascot-peeker,
+.mascot-corner {
+  position: absolute;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+  user-select: none;
+  cursor: pointer;
+  /* A tap opens the arcade (js/main.js), so skip the double-tap zoom delay */
+  touch-action: manipulation;
+  transform-origin: center bottom;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.25s ease;
+}
+
+.mascot-peeker .mascot-img,
+.mascot-corner .mascot-img {
+  display: block;
+  width: clamp(100px, 12vw, 160px);
+  height: auto;
+  filter: drop-shadow(6px 6px 0 var(--ink));
+  transition: transform 0.25s ease;
+}
+
+.mascot-peeker .mascot-bubble,
+.mascot-corner .mascot-bubble {
+  position: relative;
+  padding: 5px 12px;
+  margin-bottom: 6px;
+  font-family: var(--font-tape);
+  font-size: clamp(0.72rem, 0.85vw, 0.92rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink);
+  background: var(--tape);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--ink);
+  animation: mascot-bubble-pulse 2.8s ease-in-out infinite;
+  transition: transform 0.25s cubic-bezier(0.2, 1.4, 0.4, 1), background-color 0.2s ease;
+}
+
+.mascot-peeker .mascot-bubble::after,
+.mascot-corner .mascot-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--ink);
+}
+
+.mascot-peeker:hover .mascot-bubble,
+.mascot-corner:hover .mascot-bubble {
+  transform: translateY(-4px) scale(1.08);
+  background: #FFF066;
+}
+
+/* 25% Off-Edge / Peeking Positionings: Mascot partially concealed until hovered */
+/* 1. Hero: Peeking from bottom-left corner */
+.mascot-peeker--hero,
+.mascot-peeker--bottom-left {
+  bottom: -15px;
+  left: -20px;
+  transform: translate(-15%, 22%) rotate(-8deg);
+  animation: mascot-peek-sway-left 4.5s ease-in-out infinite;
+}
+.mascot-peeker--hero:hover,
+.mascot-peeker--bottom-left:hover {
+  transform: translate(18px, -15px) scale(1.12) rotate(3deg);
+  animation-play-state: paused;
+}
+
+/* 2. About: Peeking from bottom-right of about panel */
+.mascot-peeker--about,
+.mascot-peeker--bottom-right {
+  bottom: -15px;
+  right: -20px;
+  transform: translate(15%, 20%) rotate(8deg);
+  animation: mascot-peek-sway-right 4.8s ease-in-out 0.6s infinite;
+}
+.mascot-peeker--about:hover,
+.mascot-peeker--bottom-right:hover {
+  transform: translate(-18px, -15px) scale(1.12) rotate(-3deg);
+  animation-play-state: paused;
+}
+
+/* 3. Odoo: Peeking from left edge */
+.mascot-peeker--odoo,
+.mascot-peeker--left-side {
+  top: 48%;
+  left: -24px;
+  transform: translateY(-50%) translate(-22%, 0) rotate(10deg);
+  animation: mascot-peek-side-left 4.2s ease-in-out 1.2s infinite;
+}
+.mascot-peeker--odoo:hover,
+.mascot-peeker--left-side:hover {
+  transform: translateY(-50%) translate(20px, 0) scale(1.14) rotate(0deg);
+  animation-play-state: paused;
+}
+
+/* 4. Prizes: Peeking from top-right corner of prize sunburst */
+.mascot-peeker--prizes,
+.mascot-peeker--top-right {
+  top: -12px;
+  right: -20px;
+  transform: translate(18%, -16%) rotate(-10deg);
+  animation: mascot-peek-top-right 4s ease-in-out 0.4s infinite;
+}
+.mascot-peeker--prizes:hover,
+.mascot-peeker--top-right:hover {
+  transform: translate(-18px, 16px) scale(1.12) rotate(2deg);
+  animation-play-state: paused;
+}
+
+/* 5. FAQ: Peeking from bottom-right corner */
+.mascot-peeker--faq {
+  bottom: -15px;
+  right: -20px;
+  transform: translate(16%, 22%) rotate(6deg);
+  animation: mascot-peek-sway-right 4.6s ease-in-out 1.5s infinite;
+}
+.mascot-peeker--faq:hover {
+  transform: translate(-18px, -15px) scale(1.12) rotate(-2deg);
+  animation-play-state: paused;
+}
+
+/* Keyframe Animations */
+@keyframes mascot-bubble-pulse {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes mascot-peek-sway-left {
+  0%, 100% { transform: translate(-15%, 22%) rotate(-8deg); }
+  50% { transform: translate(-10%, 16%) rotate(-4deg); }
+}
+
+@keyframes mascot-peek-sway-right {
+  0%, 100% { transform: translate(15%, 20%) rotate(8deg); }
+  50% { transform: translate(10%, 14%) rotate(4deg); }
+}
+
+@keyframes mascot-peek-side-left {
+  0%, 100% { transform: translateY(-50%) translate(-22%, 0) rotate(10deg); }
+  50% { transform: translateY(-50%) translate(-14%, -6px) rotate(6deg); }
+}
+
+@keyframes mascot-peek-top-right {
+  0%, 100% { transform: translate(18%, -16%) rotate(-10deg); }
+  50% { transform: translate(12%, -10%) rotate(-6deg); }
+}
+
+@keyframes mascot-float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+/* Rapid Comic Burst Animation on Click / Flip */
+.mascot-peeker.is-bursting {
+  animation: mascot-burst 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important;
+}
+@keyframes mascot-burst {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.28) rotate(-12deg); }
+  50% { transform: scale(0.92) rotate(8deg); }
+  75% { transform: scale(1.15) rotate(-4deg); }
+  100% { transform: scale(1.08) rotate(0deg); }
+}
+
+@media (max-width: 768px) {
+  .mascot-peeker .mascot-img,
+  .mascot-corner .mascot-img {
+    width: clamp(75px, 16vw, 105px);
+  }
+  .mascot-peeker .mascot-bubble,
+  .mascot-corner .mascot-bubble {
+    display: none;
+  }
+}
+
+
+
+/* --------------------------------------------------------------------------
+   COMIC PAGE-FLIP REVEAL
+   Panels turn in like pages of a book: hinged on the outer edge of their
+   column, they swing open as the timeline scrolls into view, and again on
+   click. Hidden only when JS is running, so the grid still reads without it.
+   -------------------------------------------------------------------------- */
+.comic-grid {
+  perspective: 1600px;
+  perspective-origin: 50% 40%;
+}
+
+.has-js .comic-panel {
+  opacity: 0;
+}
+
+.has-js .comic-panel.is-revealed {
+  opacity: 1;
+}
+
+.comic-panel.is-flipping {
+  animation: panelPageTurn 0.62s cubic-bezier(0.22, 0.85, 0.3, 1) both;
+  transform-origin: left center;
+  z-index: 8;
+}
+
+/* Right-hand column hinges on its own outer edge, like a facing page. */
+.comic-panel:nth-child(2n).is-flipping {
+  transform-origin: right center;
+}
+
+.comic-panel:focus-visible {
+  outline: 4px solid var(--red);
+  outline-offset: 3px;
+}
+
+@keyframes panelPageTurn {
+  0% {
+    opacity: 0;
+    transform: rotateY(-84deg) scale(0.95);
+    box-shadow: 0px 0px 0px var(--ink);
+  }
+  55% {
+    opacity: 1;
+  }
+  80% {
+    transform: rotateY(7deg) scale(1.012);
+    box-shadow: 9px 9px 0px var(--ink);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateY(0deg) scale(1);
+    box-shadow: 4px 4px 0px var(--ink);
+  }
+}
+
+.comic-panel:nth-child(2n).is-flipping {
+  animation-name: panelPageTurnMirror;
+}
+
+@keyframes panelPageTurnMirror {
+  0% {
+    opacity: 0;
+    transform: rotateY(84deg) scale(0.95);
+    box-shadow: 0px 0px 0px var(--ink);
+  }
+  55% {
+    opacity: 1;
+  }
+  80% {
+    transform: rotateY(-7deg) scale(1.012);
+    box-shadow: 9px 9px 0px var(--ink);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateY(0deg) scale(1);
+    box-shadow: 4px 4px 0px var(--ink);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE MEDIA QUERIES
+   -------------------------------------------------------------------------- */
+@media (max-width: 860px) {
+  :root {
+    --tape-border-width: 6px;
+    --tape-shadow: 0px 10px 0px 0px rgba(0, 0, 0, 0.35);
+  }
+
+  .caution-tape-top {
+    top: clamp(8px, 1.8vh, 22px);
+  }
+
+  .caution-tape-bottom {
+    bottom: clamp(12px, 2.2vh, 26px);
+  }
+
+  .comic-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .timeline-header {
+    margin-bottom: -16px;
+    margin-left: 0;
+  }
+
+  .timeline-title-img {
+    width: clamp(200px, 50vw, 320px);
+  }
+
+  .panel-speech-bubble {
+    white-space: normal;
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --tape-border-width: 5px;
+    --tape-shadow: 0px 8px 0px 0px rgba(0, 0, 0, 0.35);
+  }
+
+  .center-title-img {
+    max-height: 180px;
+  }
+
+  .timeline-section {
+    padding: 40px 12px;
+  }
+
+  .comic-board {
+    padding: 12px;
+    box-shadow: 5px 5px 0px var(--ink);
+  }
+}
+
+/* WhatsApp group invite · a small fixed pill, below the nav in the stack ---- */
+.join-pill {
+  position: fixed;
+  right: clamp(12px, 2vw, 22px);
+  bottom: clamp(12px, 2vw, 22px);
+  z-index: 45;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 15px 6px 6px;
+  font-family: var(--font-tape);
+  font-size: 0.76rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--white);
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: translate 0.15s ease, box-shadow 0.15s ease;
+}
+.join-pill:hover { translate: -2px -2px; box-shadow: 6px 6px 0 var(--ink); }
+.join-pill__label b { font-weight: 400; color: #128C4A; }
+.join-pill__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  color: var(--white);
+  background: #25D366;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  animation: join-pulse 2.8s ease-out infinite;
+}
+/* Sizing the icon here too, so a missing stylesheet can never leave it full-page */
+.join-pill__icon svg { width: 17px; height: 17px; fill: currentColor; }
+/* Only the ring moves, so the pill never jitters under the pointer */
+@keyframes join-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.65); }
+  70% { box-shadow: 0 0 0 11px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+@media (max-width: 420px) {
+  .join-pill { gap: 7px; padding: 5px 12px 5px 5px; font-size: 0.68rem; }
+  .join-pill__icon { width: 26px; height: 26px; }
+  .join-pill__icon svg { width: 15px; height: 15px; }
+}

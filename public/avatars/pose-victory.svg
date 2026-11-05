@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="100%" height="100%">
+  <defs>
+    <filter id="sticker-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Transparent Background Graphic -->
+  <g filter="url(#sticker-shadow)">
+    <!-- Comic Action Burst behind -->
+    <circle cx="200" cy="220" r="140" fill="#FFF2EB" />
+    <path d="M 80 180 L 50 160 M 320 180 L 350 160 M 200 60 L 200 30 M 100 100 L 70 80 M 300 100 L 330 80" stroke="#FF5500" stroke-width="4" stroke-linecap="round" />
+
+    <!-- Character Body / Shoulders (White Pinstripe Shirt) -->
+    <path d="M 120 480 C 120 370, 150 350, 200 350 C 250 350, 280 370, 280 480 Z" fill="#FFFFFF" stroke="#121215" stroke-width="6" stroke-linejoin="round"/>
+    
+    <!-- Pinstripes -->
+    <path d="M 160 380 L 155 480 M 180 365 L 178 480 M 220 365 L 222 480 M 240 380 L 245 480" stroke="#D1D5DB" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Open Collar -->
+    <path d="M 175 350 L 200 395 L 225 350" fill="#E5E7EB" stroke="#121215" stroke-width="5"/>
+    <path d="M 165 348 L 180 385 L 200 350" fill="#FFFFFF" stroke="#121215" stroke-width="5"/>
+    <path d="M 235 348 L 220 385 L 200 350" fill="#FFFFFF" stroke="#121215" stroke-width="5"/>
+
+    <!-- Neck -->
+    <path d="M 180 310 L 180 360 C 190 370, 210 370, 220 360 L 220 310 Z" fill="#D49B74" stroke="#121215" stroke-width="5"/>
+
+    <!-- Head / Face -->
+    <path d="M 150 210 C 150 285, 170 325, 200 325 C 230 325, 250 285, 250 210 C 250 160, 230 160, 200 160 C 170 160, 150 160, 150 210 Z" fill="#E2AA84" stroke="#121215" stroke-width="6" stroke-linejoin="round"/>
+
+    <!-- Ears -->
+    <ellipse cx="148" cy="225" rx="10" ry="16" fill="#D49B74" stroke="#121215" stroke-width="5"/>
+    <ellipse cx="252" cy="225" rx="10" ry="16" fill="#D49B74" stroke="#121215" stroke-width="5"/>
+
+    <!-- Stylish Voluminous Hair (Arun's cut) -->
+    <path d="M 140 200 C 130 150, 160 110, 190 105 C 230 100, 260 120, 265 160 C 275 180, 260 210, 250 210 C 245 185, 235 170, 200 170 C 165 170, 155 185, 145 205 Z" fill="#18181D" stroke="#121215" stroke-width="6"/>
+    <!-- Hair textured waves -->
+    <path d="M 160 135 C 180 115, 215 115, 240 130" stroke="#33333C" stroke-width="5" stroke-linecap="round"/>
+    <path d="M 175 155 C 195 135, 225 140, 250 150" stroke="#33333C" stroke-width="5" stroke-linecap="round"/>
+    <!-- Fringe / quiff volume -->
+    <path d="M 155 170 C 175 145, 205 145, 225 165" stroke="#121215" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Eyebrows -->
+    <path d="M 165 200 Q 180 193 192 198" stroke="#121215" stroke-width="5" stroke-linecap="round"/>
+    <path d="M 208 198 Q 220 193 235 200" stroke="#121215" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Confident Eyes -->
+    <ellipse cx="178" cy="215" rx="7" ry="9" fill="#121215"/>
+    <circle cx="176" cy="212" r="2.5" fill="#FFFFFF"/>
+    <ellipse cx="222" cy="215" rx="7" ry="9" fill="#121215"/>
+    <circle cx="220" cy="212" r="2.5" fill="#FFFFFF"/>
+
+    <!-- Nose -->
+    <path d="M 200 215 L 197 240 L 204 240" fill="none" stroke="#B87B57" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Friendly confident smile -->
+    <path d="M 185 265 Q 200 280 215 265" fill="none" stroke="#121215" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- HAND: VICTORY / PEACE SIGN ✌️ -->
+    <!-- Arm coming up -->
+    <path d="M 270 420 Q 300 350 300 280" stroke="#E2AA84" stroke-width="32" stroke-linecap="round"/>
+    <path d="M 270 420 Q 300 350 300 280" stroke="#121215" stroke-width="6" fill="none"/>
+    
+    <!-- Palm / Fist -->
+    <circle cx="295" cy="255" r="26" fill="#E2AA84" stroke="#121215" stroke-width="5"/>
+    
+    <!-- Index Finger (Up) -->
+    <path d="M 285 250 L 275 175 C 275 163, 292 163, 292 175 L 295 245" fill="#E2AA84" stroke="#121215" stroke-width="5" stroke-linejoin="round"/>
+    
+    <!-- Middle Finger (Up & spread) -->
+    <path d="M 298 245 L 315 180 C 318 168, 335 173, 330 185 L 310 250" fill="#E2AA84" stroke="#121215" stroke-width="5" stroke-linejoin="round"/>
+
+    <!-- Curled fingers and thumb -->
+    <path d="M 280 260 C 275 275, 295 285, 305 270" stroke="#121215" stroke-width="4" fill="#D49B74"/>
+    <path d="M 275 250 C 265 245, 265 265, 280 265" stroke="#121215" stroke-width="4" fill="#D49B74"/>
+
+    <!-- Sparkle Stars -->
+    <g transform="translate(325, 140) scale(0.9)">
+      <path d="M 20 0 L 24 14 L 38 20 L 24 26 L 20 40 L 16 26 L 2 20 L 16 14 Z" fill="#FF5500"/>
+    </g>
+    <g transform="translate(70, 240) scale(0.7)">
+      <path d="M 20 0 L 24 14 L 38 20 L 24 26 L 20 40 L 16 26 L 2 20 L 16 14 Z" fill="#FF5500"/>
+    </g>
+
+    <!-- Comic Badge Pill -->
+    <rect x="235" y="85" width="115" height="34" rx="17" fill="#121215"/>
+    <text x="292" y="108" fill="#FFFFFF" font-family="'Syne', sans-serif" font-weight="800" font-size="14" text-anchor="middle">PEACE ✌️</text>
+  </g>
+</svg>

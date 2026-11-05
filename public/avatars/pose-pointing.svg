@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="100%" height="100%">
+  <defs>
+    <filter id="sticker-shadow-point" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Transparent Background Graphic -->
+  <g filter="url(#sticker-shadow-point)">
+    <!-- Comic Action Burst behind -->
+    <circle cx="200" cy="220" r="140" fill="#FFF5ED" />
+    <path d="M 80 180 L 50 160 M 320 180 L 350 160 M 200 60 L 200 30 M 100 100 L 70 80 M 300 100 L 330 80" stroke="#FF5500" stroke-width="4" stroke-linecap="round" />
+
+    <!-- Character Body / Shoulders -->
+    <path d="M 120 480 C 120 370, 150 350, 200 350 C 250 350, 280 370, 280 480 Z" fill="#FFFFFF" stroke="#121215" stroke-width="6" stroke-linejoin="round"/>
+    <!-- Pinstripes -->
+    <path d="M 160 380 L 155 480 M 180 365 L 178 480 M 220 365 L 222 480 M 240 380 L 245 480" stroke="#D1D5DB" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Open Collar -->
+    <path d="M 175 350 L 200 395 L 225 350" fill="#E5E7EB" stroke="#121215" stroke-width="5"/>
+    <path d="M 165 348 L 180 385 L 200 350" fill="#FFFFFF" stroke="#121215" stroke-width="5"/>
+    <path d="M 235 348 L 220 385 L 200 350" fill="#FFFFFF" stroke="#121215" stroke-width="5"/>
+
+    <!-- Neck -->
+    <path d="M 180 310 L 180 360 C 190 370, 210 370, 220 360 L 220 310 Z" fill="#D49B74" stroke="#121215" stroke-width="5"/>
+
+    <!-- Head / Face -->
+    <path d="M 150 210 C 150 285, 170 325, 200 325 C 230 325, 250 285, 250 210 C 250 160, 230 160, 200 160 C 170 160, 150 160, 150 210 Z" fill="#E2AA84" stroke="#121215" stroke-width="6" stroke-linejoin="round"/>
+
+    <!-- Ears -->
+    <ellipse cx="148" cy="225" rx="10" ry="16" fill="#D49B74" stroke="#121215" stroke-width="5"/>
+    <ellipse cx="252" cy="225" rx="10" ry="16" fill="#D49B74" stroke="#121215" stroke-width="5"/>
+
+    <!-- Stylish Hair -->
+    <path d="M 140 200 C 130 150, 160 110, 190 105 C 230 100, 260 120, 265 160 C 275 180, 260 210, 250 210 C 245 185, 235 170, 200 170 C 165 170, 155 185, 145 205 Z" fill="#18181D" stroke="#121215" stroke-width="6"/>
+    <path d="M 160 135 C 180 115, 215 115, 240 130" stroke="#33333C" stroke-width="5" stroke-linecap="round"/>
+    <path d="M 175 155 C 195 135, 225 140, 250 150" stroke="#33333C" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Eyebrows -->
+    <path d="M 165 196 Q 180 190 192 195" stroke="#121215" stroke-width="5" stroke-linecap="round"/>
+    <path d="M 208 193 Q 220 188 235 194" stroke="#121215" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Playful winking eye & open eye -->
+    <ellipse cx="178" cy="215" rx="7" ry="9" fill="#121215"/>
+    <circle cx="176" cy="212" r="2.5" fill="#FFFFFF"/>
+    <!-- Wink right eye -->
+    <path d="M 215 214 Q 224 207 234 215" fill="none" stroke="#121215" stroke-width="4.5" stroke-linecap="round"/>
+
+    <!-- Nose -->
+    <path d="M 200 215 L 197 240 L 204 240" fill="none" stroke="#B87B57" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Confident half smile -->
+    <path d="M 188 262 Q 202 278 220 262" fill="none" stroke="#121215" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- HAND: POINTING FORWARD 👉 -->
+    <!-- Arm -->
+    <path d="M 270 410 Q 300 350 305 290" stroke="#E2AA84" stroke-width="32" stroke-linecap="round"/>
+    <!-- Hand base -->
+    <circle cx="295" cy="270" r="24" fill="#E2AA84" stroke="#121215" stroke-width="5"/>
+    <!-- Index Finger pointing directly forward / left-up -->
+    <path d="M 285 260 L 210 235 C 196 230, 202 210, 216 215 L 290 245 Z" fill="#E2AA84" stroke="#121215" stroke-width="5" stroke-linejoin="round"/>
+    <!-- Thumb sticking up (finger gun) -->
+    <path d="M 295 255 L 295 210 C 295 198, 315 198, 315 210 L 315 255 Z" fill="#E2AA84" stroke="#121215" stroke-width="5" stroke-linejoin="round"/>
+    <!-- Curled fingers -->
+    <circle cx="295" cy="275" r="14" fill="#D49B74" stroke="#121215" stroke-width="4"/>
+
+    <!-- Bullet / Zap sparks -->
+    <path d="M 195 220 L 170 215 M 190 235 L 165 240" stroke="#FF5500" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Comic Badge Pill -->
+    <rect x="235" y="85" width="130" height="34" rx="17" fill="#FF5500"/>
+    <text x="300" y="108" fill="#FFFFFF" font-family="'Syne', sans-serif" font-weight="800" font-size="14" text-anchor="middle">LET'S TALK 👉</text>
+  </g>
+</svg>

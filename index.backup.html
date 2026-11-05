@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arun Mohan | Web Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-color: #050505;
+      --surface: rgba(20, 20, 20, 0.6);
+      --surface-border: rgba(255, 255, 255, 0.08);
+      --accent-cyan: #00e5ff;
+      --accent-purple: #bd00ff;
+      --text-main: #f8f8f8;
+      --text-muted: #a0a0a0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(0, 229, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 85% 30%, rgba(189, 0, 255, 0.05) 0%, transparent 50%);
+    }
+
+    h1, h2, h3 {
+      font-family: 'Syne', sans-serif;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .glass {
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--surface-border);
+      border-radius: 24px;
+    }
+
+    nav {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 40px;
+      z-index: 1000;
+      display: flex;
+      gap: 30px;
+      border-radius: 50px;
+    }
+
+    nav a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--accent-cyan);
+    }
+
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -2px;
+    }
+
+    header p {
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      color: var(--text-muted);
+      max-width: 600px;
+    }
+
+    .status-badge {
+      margin-top: 30px;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+      background: rgba(0, 229, 255, 0.05);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+    }
+
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 4px solid var(--accent-cyan);
+      margin-bottom: 25px;
+      object-fit: cover;
+      box-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
+    }
+
+    section {
+      padding: 100px 10%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    section h2 {
+      font-size: 3rem;
+      margin-bottom: 50px;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .about-text strong {
+      color: var(--text-main);
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .tech-pill {
+      padding: 10px 20px;
+      border-radius: 50px;
+      border: 1px solid var(--surface-border);
+      font-size: 0.9rem;
+      transition: 0.3s;
+      cursor: default;
+    }
+
+    .tech-pill:hover {
+      border-color: var(--accent-purple);
+      background: rgba(189, 0, 255, 0.1);
+      box-shadow: 0 0 15px rgba(189, 0, 255, 0.3);
+    }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      padding: 40px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(0,229,255,0.1), transparent);
+      opacity: 0;
+      transition: 0.4s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .card .meta {
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .bento-item {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: 0.3s;
+      cursor: pointer;
+      min-height: 250px;
+    }
+
+    .bento-item:hover {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.15);
+    }
+
+    .bento-item h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .bento-item p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .bento-item .tags {
+      font-size: 0.8rem;
+      color: var(--accent-purple);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    footer {
+      text-align: center;
+      padding: 60px 20px;
+      border-top: 1px solid var(--surface-border);
+      margin-top: 50px;
+    }
+
+    .social-links a {
+      color: var(--text-main);
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: var(--accent-cyan);
+    }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      nav { width: 90%; padding: 15px 20px; justify-content: center; gap: 15px; }
+      nav a { font-size: 0.8rem; }
+      section { padding: 80px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="glass">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#hackathons">Hackathons</a>
+  </nav>
+
+  <header>
+    <img src="pfp.jpg" alt="Arun Mohan" class="profile-pic">
+    <h1>Arun <span class="gradient-text">Mohan</span></h1>
+    <p>Full-Stack Web Developer & Freelancer. Currently building projects, writing game server scripts, and always learning.</p>
+    <div class="status-badge">B.Tech CSE (Cloud Computing) @ SRMIST</div>
+  </header>
+
+  <section id="about">
+    <h2><span class="gradient-text">About</span> Me</h2>
+    <div class="about-grid">
+      <div class="about-text glass" style="padding: 40px;">
+        <p>I started out tinkering with GTA IV CitizenIV servers when I was 15, and that naturally pushed me into full-stack web development. Right now, I'm a B.Tech student focusing on <strong>Cloud Computing</strong> and a part of the <strong>DSC technical team</strong>.</p>
+        <p>I don't just stick to tutorials. I do active freelance work in web development and game server scripting. Whether it's building a responsive website for a client, making a web-based in-game phone, or messing around with Python projects, I learn best by actually building things.</p>
+      </div>
+      <div class="tech-stack">
+        <div class="tech-pill glass">JavaScript (HTML/CSS)</div>
+        <div class="tech-pill glass">Python</div>
+        <div class="tech-pill glass">C / C++</div>
+        <div class="tech-pill glass">Lua</div>
+        <div class="tech-pill glass">Django & Flask</div>
+        <div class="tech-pill glass">PeerJS</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Current <span class="gradient-text">Work</span></h2>
+    <div class="timeline-grid">
+      <div class="card glass">
+        <div class="meta">Freelance</div>
+        <h3>Web Developer</h3>
+        <p style="margin-bottom: 10px; color: var(--text-main); font-weight: 600;">Client Projects</p>
+        <p>I take on freelance web development gigs, like my recent work for Tajmahal Carpets. I build clean, responsive, and functional websites based on client needs.</p>
+      </div>
+      <div class="card glass">
+        <div class="meta">Freelance</div>
+        <h3>CitizenIV Developer</h3>
+        <p style="margin-bottom: 10px; color: var(--text-main); font-weight: 600;">Game Server Scripting</p>
+        <p>I actively write custom scripts for CitizenIV servers. I build in-game UI using web tech (like virtual smartphones) and create Python utility tools like Lua string translators.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>My <span class="gradient-text">Projects</span></h2>
+    <div class="bento-grid" id="repo-container">
+      <p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Syncing with GitHub...</p>
+    </div>
+  </section>
+
+  <section id="hackathons">
+    <h2><span class="gradient-text">Hackathons</span></h2>
+    <div class="timeline-grid">
+      <div class="card glass">
+        <div class="meta">Feb 2026</div>
+        <h3>INNOBYTE '26</h3>
+        <p>Selected to compete with <strong>Team Optiminds</strong> at the SIMATS hackathon.</p>
+      </div>
+      <div class="card glass">
+        <div class="meta">Feb 2026</div>
+        <h3>Sudhee HICON</h3>
+        <p>Traveled to CBIT, Hyderabad to compete and build in a fast-paced environment.</p>
+      </div>
+      <div class="card glass">
+        <div class="meta">36-Hour Sprint</div>
+        <h3>PEC 3.0</h3>
+        <p>My first major hackathon. Coded through a 36-hour sprint to prototype and build a project under pressure.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://github.com/Arunmohankml" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/arun-mohan" target="_blank">LinkedIn</a>
+      <a href="https://www.instagram.com/4nuun" target="_blank">Instagram</a>
+    </div>
+    <p style="color: var(--text-muted); margin-top: 30px; font-size: 0.9rem;">
+      © 2026 Arun Mohan. Always learning.
+    </p>
+  </footer>
+
+  <script>
+    async function fetchGitHubRepos() {
+      const username = 'Arunmohankml';
+      const container = document.getElementById('repo-container');
+      
+      try {
+        const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
+        if (!response.ok) throw new Error('Network response was not ok');
+        
+        const repos = await response.json();
+        container.innerHTML = ''; // Clear the loader
+
+        repos.forEach(repo => {
+          if (repo.fork) return; // Skip forks to show only your original work
+
+          const item = document.createElement('div');
+          item.className = 'bento-item glass';
+          item.onclick = () => window.open(repo.html_url, '_blank');
+          
+          item.innerHTML = `
+            <div>
+              <h3>${repo.name.replace(/-/g, ' ')}</h3>
+              <p>${repo.description || 'No description provided.'}</p>
+            </div>
+            <div class="tags">${repo.language || 'Project'}</div>
+          `;
+          container.appendChild(item);
+        });
+      } catch (error) {
+        container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--accent-purple);">Failed to load repositories. Please check back later.</p>`;
+      }
+    }
+    fetchGitHubRepos();
+  </script>
+</body>
+</html>

@@ -1,0 +1,538 @@
+/* ==========================================================================
+   Timeline · brand yellow + scroll-driven page-flip book (js/timeline.js)
+   Without JS, or with reduced motion, the chapters render as cards.
+   ========================================================================== */
+
+/* Same yellow and squiggle tint as the About Make-A-Ton panel, so the band
+   reads as part of the same set rather than a separate sunburst poster */
+.section--timeline {
+  --squiggle-yellow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 445 444'%3E%3Cdefs%3E%3Cpath id='q' d='M16 62C16 80 26 90 40 90C62 90 64 36 86 36C108 36 112 90 134 90C156 90 160 36 182 36C204 36 206 90 228 90C242 90 252 80 252 62'/%3E%3C/defs%3E%3Cg fill='none' stroke='%23F4B41F' stroke-width='32' stroke-linecap='round' stroke-linejoin='round'%3E%3Cuse href='%23q' x='260' y='85'/%3E%3Cuse href='%23q' x='-185' y='85'/%3E%3Cuse href='%23q' x='37' y='307'/%3E%3C/g%3E%3C/svg%3E");
+  background: var(--yellow);
+}
+/* The section is ~5 viewports tall, so a squiggle field anchored to it drifts
+   against the book, which is pinned. Anchoring the tile to the viewport instead
+   keeps one still field behind everything. The mask the other sections use has
+   no viewport-anchored equivalent, so this layer paints the pre-coloured tile. */
+.section--timeline::before {
+  -webkit-mask: none;
+  mask: none;
+  background:
+    var(--squiggle-yellow) 0 0 / max(150px, 13.73vw) max(150px, 13.73vw) repeat fixed,
+    var(--yellow);
+}
+
+/* Static chapter cards ----------------------------------------------------- */
+.timeline-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 20px;
+  counter-reset: chapter;
+}
+.timeline-list > li {
+  counter-increment: chapter;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 22px 20px;
+  background: var(--paper);
+  border: var(--line) solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.timeline-list > li::before {
+  content: "Chapter " counter(chapter, decimal-leading-zero);
+  justify-self: start;
+  padding: 0.3em 0.8em;
+  font-family: var(--font-tape);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--ink);
+  border-radius: 999px;
+}
+.timeline-list time { font-family: var(--font-display); font-size: clamp(1.8rem, 1.5rem + 1vw, 2.4rem); line-height: 1; }
+.timeline-list h3 { font-family: var(--font-tape); font-size: 1.2rem; font-weight: 400; line-height: 1.15; }
+
+/* Book mode ---------------------------------------------------------------- */
+.is-book .timeline-list {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.is-book .section-head { margin-bottom: 0; }
+
+.book-scroller { position: relative; height: calc(100svh + var(--leaves, 6) * 46svh); }
+.book-stage {
+  position: sticky;
+  top: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: clamp(22px, 4svh, 40px);
+  height: 100svh;
+  padding-top: 56px;
+  overflow: hidden;
+}
+
+.book {
+  --page-w: min(440px, 38vw, calc(var(--page-h) * 0.84));
+  --page-h: clamp(380px, calc(100svh - 220px), 500px);
+  position: relative;
+  width: calc(var(--page-w) * 2);
+  height: var(--page-h);
+  perspective: 2600px;
+  font-size: clamp(11.5px, calc(var(--page-h) * 0.024), 13.5px);
+}
+.book::before {
+  content: "";
+  position: absolute;
+  inset: -14px -14px -16px;
+  z-index: -1;
+  background: var(--red);
+  border: var(--line) solid var(--ink);
+  border-radius: 20px;
+  box-shadow: 12px 12px 0 var(--ink);
+}
+
+.book .page {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(5px, 0.9vh, 8px);
+  width: var(--page-w);
+  height: 100%;
+  padding: clamp(14px, 2vh, 22px) clamp(16px, 2vw, 24px) clamp(12px, 1.5vh, 16px);
+  overflow: hidden;
+  line-height: 1.38;
+  background: var(--paper);
+  border: var(--line) solid var(--ink);
+}
+.book .page--left { border-radius: 14px 0 0 14px; background-image: linear-gradient(to left, rgba(12, 14, 15, 0.16), transparent 14%); }
+.book .page--right { border-radius: 0 14px 14px 0; background-image: linear-gradient(to right, rgba(12, 14, 15, 0.16), transparent 14%); }
+.book .page--base.page--left { left: 0; }
+.book .page--base.page--right { left: 50%; }
+
+.leaf {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--page-w);
+  height: 100%;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transform: rotateY(calc(var(--t, 0) * -180deg));
+  will-change: transform;
+}
+.leaf > .page { left: 0; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.leaf > .face--back { transform: rotateY(180deg); }
+.leaf > .page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--ink);
+  opacity: calc(var(--t, 0) * (1 - var(--t, 0)) * 1.1);
+}
+
+/* Page content */
+.page__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6em;
+  width: 100%;
+}
+
+.page__kicker {
+  align-self: flex-start;
+  padding: 0.3em 0.8em;
+  font-family: var(--font-tape);
+  font-size: 0.75em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--ink);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.page__badge {
+  padding: 0.25em 0.7em;
+  font-family: var(--font-tape);
+  font-size: 0.7em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--tape);
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: 2px 2px 0 var(--ink);
+  rotate: -3deg;
+  white-space: nowrap;
+}
+
+.page__date-pill {
+  padding: 0.25em 0.7em;
+  font-family: var(--font-tape);
+  font-size: 0.72em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--ink);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.page__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.3vw, 2.2rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+  margin-block: 2px;
+}
+
+.page__activity {
+  align-self: flex-start;
+  margin-block: 2px;
+  padding: 0.22em 0.65em;
+  font-family: var(--font-tape);
+  font-size: clamp(0.72rem, 1.1vw, 0.88rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  background: var(--tape);
+  border: var(--line) solid var(--ink);
+  box-shadow: 0 3px 0 var(--tape-shadow);
+  rotate: -1.5deg;
+}
+
+.page__meta { display: grid; gap: 0.25em; margin-block: 2px; }
+.page__meta div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8em;
+  padding-bottom: 0.25em;
+  border-bottom: 2px dashed rgba(12, 14, 15, 0.35);
+}
+.page__meta dt { font-family: var(--font-tape); font-size: 0.72em; letter-spacing: 0.05em; text-transform: uppercase; }
+.page__meta dd { margin: 0; font-weight: 700; text-align: right; font-size: 0.82em; }
+
+.page__blurb {
+  font-size: clamp(0.75rem, 0.95vw, 0.85rem);
+  line-height: 1.36;
+  margin-block: 2px;
+}
+
+.page__folio { margin-top: auto; font-family: var(--font-tape); font-size: 0.75em; opacity: 0.65; }
+.book .page--right .page__folio { align-self: flex-end; }
+
+/* Chapter art (left pages) */
+.book .page--art {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  background-color: var(--cream);
+  padding: clamp(14px, 2vh, 20px) clamp(16px, 2vw, 22px) clamp(12px, 1.5vh, 16px);
+}
+
+.page__panel-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+  margin-block: auto;
+  padding-block: 0.2em;
+}
+
+/* Only phones use this: on wider screens the panel has its own facing page */
+.page__inline-art { display: none; }
+
+.page__panel-frame {
+  position: relative;
+  width: min(100%, calc(clamp(140px, 26svh, 220px) * 4 / 3));
+  max-width: 100%;
+  aspect-ratio: 4 / 3;
+  max-height: clamp(140px, 26svh, 220px);
+  background: var(--white);
+  border: var(--line) solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 5px 5px 0 var(--ink);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page__panel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.page__panel-fallback {
+  display: grid;
+  gap: 0.3em;
+  padding: 1em;
+  text-align: center;
+  background: var(--cream);
+  width: 100%;
+  height: 100%;
+  place-content: center;
+}
+.page__panel-fallback span {
+  font-family: var(--font-tape);
+  font-size: 0.7em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.page__panel-fallback b {
+  font-family: var(--font-display);
+  font-size: 2.1em;
+  font-weight: 400;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.page__bubble {
+  position: relative;
+  margin-top: -14px;
+  width: min(96%, 340px);
+  padding: 0.35em 0.8em;
+  font-family: var(--font-tape);
+  font-size: 0.72em;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--ink);
+  background: var(--white);
+  border: var(--line) solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 var(--ink);
+  z-index: 10;
+}
+
+.page__bubble::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 24px;
+  width: 12px;
+  height: 12px;
+  background: var(--white);
+  border-left: var(--line) solid var(--ink);
+  border-top: var(--line) solid var(--ink);
+  transform: rotate(45deg);
+}
+
+.page__bubble-highlight {
+  color: var(--red);
+  background: #FFF3A8;
+  padding: 0.05em 0.25em;
+  border-radius: 3px;
+}
+
+.page__foot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+/* Covers and end page */
+.book .page--cover,
+.book .page--backcover,
+.book .page--end { align-items: center; justify-content: center; gap: 1em; text-align: center; }
+.book .page--cover,
+.book .page--backcover { color: var(--white); background-color: var(--blue); }
+.book .page--end { background-color: var(--cream); }
+.page__tag {
+  padding: 0.4em 1em;
+  font-family: var(--font-tape);
+  font-size: 0.9em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--tape);
+  border: var(--line) solid var(--ink);
+  rotate: -3deg;
+}
+.page__cover-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.2vw, 3.5rem);
+  line-height: 0.92;
+  text-transform: uppercase;
+  color: var(--tape);
+  -webkit-text-stroke: 0.08em var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 0.05em 0.06em 0 var(--ink);
+}
+.page__cover-sub { font-family: var(--font-tape); font-size: clamp(0.85rem, 1.2vw, 1.05rem); text-transform: uppercase; text-shadow: 2px 2px 0 var(--ink); }
+.page__logo { width: 82%; height: auto; }
+/* On the cream end page the logo is the sign-off, above the line of type */
+.page__logo--end { width: 62%; margin-bottom: -0.2em; }
+
+/* Contents page */
+.book .page--contents {
+  padding: 1.4em 1.6em 1.1em;
+  gap: 0.35em;
+}
+.book .page--contents .page__kicker {
+  align-self: center;
+  font-size: 0.7em;
+  padding: 0.25em 0.75em;
+}
+.book .page--contents .page__title {
+  align-self: center;
+  text-align: center;
+  margin-bottom: 0.1em;
+  font-size: 2.5em;
+  line-height: 0.9;
+}
+.page__toc {
+  display: grid;
+  gap: 0.1em;
+}
+.page__toc li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 0.5em;
+  padding: 0.28em 0.15em;
+  border-bottom: 1.5px dashed rgba(12, 14, 15, 0.3);
+}
+.page__toc span:first-child {
+  font-family: var(--font-display);
+  font-size: 1.25em;
+  line-height: 1;
+}
+.page__toc span:nth-child(2) {
+  font-weight: 700;
+  font-size: 0.88em;
+  line-height: 1.15;
+}
+.page__toc span:last-child {
+  font-family: var(--font-tape);
+  font-size: 0.72em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.book .page--contents .page__folio {
+  margin-top: auto;
+  font-size: 0.75em;
+}
+
+/* Phones: a single page that flips away to the left, comic panel stacked above
+   the chapter text because the facing art page is not rendered here */
+@media (max-width: 760px) {
+  .book-stage {
+    gap: 16px;
+    padding-top: 40px;
+    padding-inline: 16px;
+  }
+
+  .book {
+    --page-w: min(90vw, 400px);
+    --page-h: min(580px, calc(100svh - 130px), calc(var(--page-w) * 1.42));
+    width: var(--page-w);
+    font-size: max(13px, calc(var(--page-w) * 0.04));
+  }
+  .book::before {
+    inset: -10px -10px -12px;
+    border-radius: 18px;
+    box-shadow: 10px 10px 0 var(--ink);
+  }
+  .book .page--base.page--left,
+  .leaf > .face--back { display: none; }
+  .book .page--base.page--right,
+  .leaf { left: 0; }
+  .book .page--right { border-radius: 14px; }
+
+  .book .page {
+    padding: clamp(16px, 4vw, 22px) clamp(15px, 3.8vw, 18px);
+    gap: clamp(8px, 1.6svh, 12px);
+    justify-content: space-between;
+  }
+
+  .page__head {
+    margin-bottom: 0;
+  }
+
+  .page__title {
+    font-size: clamp(2rem, 6.2vw, 2.5rem);
+    line-height: 0.92;
+    margin-top: 0.05em;
+  }
+
+  .page__activity {
+    font-size: clamp(0.92rem, 2.7vw, 1.05rem);
+    margin-block: 0;
+    padding: 0.35em 0.7em;
+  }
+
+  .page__inline-art {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 0.05em;
+    flex: 1;
+    min-height: 0;
+    justify-content: center;
+  }
+  .page__inline-art .page__panel-frame {
+    width: min(100%, calc(clamp(160px, 28svh, 230px) * 4 / 3));
+    aspect-ratio: 4 / 3;
+    max-height: clamp(160px, 28svh, 230px);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .page__inline-art .page__bubble {
+    width: 100%;
+    margin-top: -12px;
+    padding: 0.45em 0.8em;
+    font-size: clamp(0.74rem, 2.2vw, 0.84rem);
+    line-height: 1.25;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  /* The bubble is wider than the panel here, so its tail points at the middle */
+  .page__inline-art .page__bubble::before { left: calc(50% - 6px); }
+
+  .page__blurb {
+    font-size: clamp(0.98rem, 2.9vw, 1.1rem);
+    font-weight: 500;
+    line-height: 1.48;
+    margin-top: 0;
+    color: var(--ink);
+  }
+
+  /* The head already carries the date as a pill, so the meta row is redundant
+     on a page that now has to fit the panel too */
+  .page--chapter .page__meta { display: none; }
+
+  /* The stack reads from the top so the title lands high on the page. Folios
+     are a spread convention, so they go rather than sit under a single page. */
+  .book .page__folio { display: none; }
+
+  .book .page--cover,
+  .book .page--backcover,
+  .book .page--end {
+    justify-content: center;
+    gap: 1.2em;
+  }
+  .book .page--contents {
+    padding: clamp(16px, 4vw, 22px);
+    justify-content: space-between;
+  }
+}
