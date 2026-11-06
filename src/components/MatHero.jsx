@@ -668,7 +668,7 @@ export default function MatHero() {
             position: 'absolute',
             left: 'clamp(46%, 49vw, 54%)',
             bottom: 'clamp(-15px, -1.5vh, 0px)',
-            zIndex: 25,
+            zIndex: 14,
             cursor: 'pointer',
             display: 'flex',
             flexDirection: 'column',
@@ -782,7 +782,7 @@ export default function MatHero() {
             right: '-20px',
             width: 'calc(100% + 40px)',
             height: 'clamp(170px, 21vh, 240px)',
-            zIndex: 15,
+            zIndex: 25,
             pointerEvents: 'none',
             filter: 'drop-shadow(0 6px 0 #0C0E0F)'
           }}
