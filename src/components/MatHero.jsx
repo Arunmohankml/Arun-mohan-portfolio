@@ -499,9 +499,9 @@ export default function MatHero() {
             onMouseEnter={() => playSfx('pop')}
             style={{
               position: 'absolute',
-              top: 'clamp(38%, 42vh, 48%)',
-              right: 'clamp(290px, 25vw, 380px)',
-              width: 'clamp(75px, 6.5vw, 105px)',
+              top: 'clamp(70px, 10vh, 105px)',
+              right: 'clamp(260px, 22vw, 340px)',
+              width: 'clamp(68px, 5.8vw, 92px)',
               height: 'auto',
               zIndex: 6
             }}
@@ -529,9 +529,9 @@ export default function MatHero() {
             onMouseEnter={() => playSfx('pop')}
             style={{
               position: 'absolute',
-              top: 'clamp(66%, 68vh, 76%)',
-              right: 'clamp(35px, 4vw, 72px)',
-              width: 'clamp(65px, 5.8vw, 88px)',
+              top: 'clamp(48%, 51vh, 55%)',
+              right: 'clamp(38px, 4.2vw, 70px)',
+              width: 'clamp(60px, 5.2vw, 80px)',
               height: 'auto',
               zIndex: 6
             }}
