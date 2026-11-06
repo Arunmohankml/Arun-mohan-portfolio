@@ -1,8 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
+
+const AVATAR_POSES = [
+  { src: '/avatars/arun-victory.png', name: 'Peace Sign', sfx: 'pop' },
+  { src: '/avatars/arun-thumbsup.png', name: 'Thumbs Up', sfx: 'chime' },
+  { src: '/avatars/arun-fingerguns.png', name: 'Finger Guns', sfx: 'pow' },
+  { src: '/avatars/arun-shades.png', name: 'Cool Shades', sfx: 'whoosh' },
+  { src: '/avatars/arun-pointing.png', name: 'Pointing', sfx: 'boing' },
+  { src: '/avatars/arun-headphones.png', name: 'Headphones', sfx: 'pop' },
+  { src: '/avatars/arun-confident.png', name: 'Confident', sfx: 'pow' },
+  { src: '/avatars/arun-ready.png', name: 'Ready Stance', sfx: 'zip' },
+  { src: '/avatars/arun-shrug.png', name: 'Shrug', sfx: 'boing' },
+];
 
 export default function MatHero() {
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
+  const [poseIndex, setPoseIndex] = useState(0);
+  const [isSwapping, setIsSwapping] = useState(false);
+
+  // Preload all avatar poses on mount for instantaneous, zero-lag swapping
+  useEffect(() => {
+    AVATAR_POSES.forEach((pose) => {
+      const img = new Image();
+      img.src = pose.src;
+    });
+  }, []);
 
   const handleMouseMove = (e) => {
     const { clientX, clientY } = e;
@@ -17,16 +39,26 @@ export default function MatHero() {
     }
   };
 
-  const handleAvatarClick = () => {
-    playSfx('pop');
+  const handleAvatarClick = (e) => {
+    if (e && e.cancelable) {
+      // prevent passive scroll conflict on fast taps
+    }
+    const nextIndex = (poseIndex + 1) % AVATAR_POSES.length;
+    setPoseIndex(nextIndex);
+    setIsSwapping(true);
+    setTimeout(() => setIsSwapping(false), 240);
+
+    const sfx = AVATAR_POSES[nextIndex].sfx || 'pop';
+    playSfx(sfx);
+
     try {
       confetti({
-        particleCount: 35,
+        particleCount: 30,
         spread: 60,
-        origin: { y: 0.55 },
+        origin: { y: 0.58 },
         colors: ['#FFE23A', '#EF4225', '#4080FB', '#FFFFFF']
       });
-    } catch (e) {}
+    } catch (err) {}
   };
 
   return (
@@ -673,10 +705,12 @@ export default function MatHero() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            filter: 'drop-shadow(4px 4px 0 #FFFFFF) drop-shadow(-4px -4px 0 #FFFFFF) drop-shadow(7px 7px 0 #0C0E0F)'
+            filter: 'drop-shadow(4px 4px 0 #FFFFFF) drop-shadow(-4px -4px 0 #FFFFFF) drop-shadow(7px 7px 0 #0C0E0F)',
+            transition: 'transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1)'
           }}
           onClick={handleAvatarClick}
-          title="Click Arun!"
+          onTouchStart={handleAvatarClick}
+          title={`Arun Mohan - ${AVATAR_POSES[poseIndex].name} (Touch or click to change pose!)`}
         >
           {/* Yellow Doodle Crown (LOCKED DIRECTLY TO ARUN'S HAIR) */}
           <div 
@@ -685,7 +719,8 @@ export default function MatHero() {
               top: 'clamp(-36px, -4vh, -22px)', 
               right: '25%', 
               zIndex: 30, 
-              transform: 'rotate(18deg)',
+              transform: isSwapping ? 'rotate(26deg) scale(1.15)' : 'rotate(18deg) scale(1)',
+              transition: 'transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1)',
               pointerEvents: 'none'
             }}
           >
@@ -704,16 +739,21 @@ export default function MatHero() {
             </svg>
           </div>
 
-          {/* Arun Mohan Photo Cutout (SUBSTANTIALLY BIGGER TO FILL THE MARKED SPACE) */}
+          {/* Arun Mohan Photo Cutout (INTERACTIVE POSES ON TOUCH/CLICK) */}
           <img
-            src="/avatars/arun-victory.png"
-            alt="Arun Mohan K"
+            key={poseIndex}
+            src={AVATAR_POSES[poseIndex].src}
+            alt={`Arun Mohan K - ${AVATAR_POSES[poseIndex].name}`}
             style={{
               height: 'clamp(580px, 86vh, 880px)',
               width: 'auto',
               objectFit: 'contain',
               objectPosition: 'bottom',
-              display: 'block'
+              display: 'block',
+              transform: isSwapping ? 'scale(0.96) rotate(-1.5deg)' : 'scale(1) rotate(0deg)',
+              transition: 'transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
+              userSelect: 'none',
+              WebkitUserSelect: 'none'
             }}
           />
         </div>
