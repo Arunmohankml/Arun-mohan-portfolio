@@ -31,8 +31,8 @@ const CHAPTERS = [
     date: '2021–2023 · Malappuram, Kerala, India',
     focus: 'Freelance Client Work, Web Development & Digital Media',
     lead: 'Freelance Client Work & Creative Media',
-    blurb: 'Started taking on client projects and exploring software development through hands-on work with CitizenIV. This period marked my introduction to web development, where I began learning how websites are built while working on freelance projects. Alongside development, I also explored video editing and photo editing, gaining experience in creating digital content and working with different creative tools.',
-    highlights: ['CLIENT PROJECTS', 'CITIZENIV', 'WEB DEVELOPMENT', 'FREELANCING', 'VIDEO EDITING', 'PHOTO EDITING']
+    blurb: 'Started taking on client projects and exploring software development through hands-on work with custom server scripting and web development. This period marked my introduction to building real-world software while shipping freelance client projects. Alongside development, I also explored video editing and photo editing, gaining experience in creating digital content and working with different creative tools.',
+    highlights: ['CLIENT PROJECTS', 'GAME SCRIPTING', 'WEB DEVELOPMENT', 'FREELANCING', 'VIDEO EDITING', 'PHOTO EDITING']
   },
   {
     num: '03',

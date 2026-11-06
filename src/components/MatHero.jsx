@@ -226,7 +226,7 @@ export default function MatHero() {
             ARUN MOHAN K.
           </h1>
 
-          {/* Subtitle Banner Box: FULL-STACK ARCHITECT & CITIZENIV MODDER */}
+          {/* Subtitle Banner Box: FULL-STACK ARCHITECT & CLOUD ENGINEER */}
           <div 
             style={{ 
               background: '#FFFFFF', 
@@ -252,7 +252,7 @@ export default function MatHero() {
               }}
             >
               FULL-STACK ARCHITECT &amp; <br />
-              <span style={{ color: '#FFE23A', WebkitTextStroke: '1.5px #0C0E0F', textShadow: '2px 2px 0 #0C0E0F' }}>CITIZENIV</span> MODDER
+              <span style={{ color: '#FFE23A', WebkitTextStroke: '1.5px #0C0E0F', textShadow: '2px 2px 0 #0C0E0F' }}>CLOUD</span> ENGINEER
             </div>
           </div>
 
