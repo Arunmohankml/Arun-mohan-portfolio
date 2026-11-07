@@ -83,8 +83,8 @@ export default function MatNavbar({ onNavigateDedicated }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '4px 10px 4px 6px',
-            gap: '6px'
+            padding: '4px 14px 4px 8px',
+            gap: '8px'
           }}
         >
           {/* Brand Logo & Back-to-Top Button */}
@@ -153,12 +153,10 @@ export default function MatNavbar({ onNavigateDedicated }) {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 'clamp(4px, 1.2vw, 14px)',
-              overflowX: 'auto',
+              gap: 'clamp(3px, 0.8vw, 10px)',
               whiteSpace: 'nowrap',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              padding: '2px 4px'
+              padding: '2px 6px 2px 2px',
+              flexShrink: 0
             }} 
             aria-label="Sections"
           >
@@ -173,16 +171,17 @@ export default function MatNavbar({ onNavigateDedicated }) {
                 }}
                 onMouseEnter={() => playSfx(link.sfx || 'pop')}
                 style={{
-                  padding: '6px clamp(8px, 1vw, 14px)',
+                  padding: '5px clamp(7px, 0.8vw, 12px)',
                   fontFamily: 'var(--font-tape)',
-                  fontSize: 'clamp(0.82rem, 0.95vw, 0.92rem)',
-                  letterSpacing: '0.04em',
+                  fontSize: 'clamp(0.8rem, 0.9vw, 0.9rem)',
+                  letterSpacing: '0.03em',
                   textTransform: 'uppercase',
                   textDecoration: 'none',
                   color: 'var(--ink)',
                   borderRadius: '999px',
                   transition: 'background 0.15s ease, color 0.15s ease, transform 0.1s ease',
-                  display: 'inline-block'
+                  display: 'inline-block',
+                  flexShrink: 0
                 }}
                 className="hover:bg-[#FFE23A] hover:-translate-y-0.5 active:translate-y-0"
               >
