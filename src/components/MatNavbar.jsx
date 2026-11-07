@@ -55,6 +55,7 @@ export default function MatNavbar({ onNavigateDedicated }) {
       }}
     >
       <header 
+        className="mat-navbar-header"
         style={{
           pointerEvents: 'auto',
           background: 'var(--paper)',

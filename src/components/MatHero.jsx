@@ -362,7 +362,8 @@ export default function MatHero() {
                 textDecoration: 'none'
               }}
             >
-              <span>EXPLORE PROJECTS</span>
+              <span className="hidden sm:inline">EXPLORE PROJECTS</span>
+              <span className="sm:hidden">PROJECTS</span>
               <span style={{ fontSize: '1.35rem' }}>→</span>
             </a>
 
@@ -393,7 +394,8 @@ export default function MatHero() {
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
               </svg>
-              <span>VIEW GITHUB PROFILE</span>
+              <span className="hidden sm:inline">VIEW GITHUB PROFILE</span>
+              <span className="sm:hidden">GITHUB</span>
               <span style={{ fontSize: '1.25rem' }}>→</span>
             </a>
 
@@ -416,6 +418,7 @@ export default function MatHero() {
 
         {/* ── TORN PAPER SEAM (DIAGONAL SPLIT) ── */}
         <div
+          className="comic-torn-divider"
           style={{
             position: 'absolute',
             top: 0,
@@ -497,83 +500,6 @@ export default function MatHero() {
               backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.16) 1.5px, transparent 2px)',
               backgroundSize: '12px 12px',
               pointerEvents: 'none'
-            }}
-          />
-
-          {/* ── FLOATING COMIC TECH LOGOS ── */}
-          <img
-            src="/logos/react-comic.png"
-            alt="React"
-            title="React.js"
-            className="comic-tech-logo comic-tech-logo-react float-logo-1"
-            onMouseEnter={() => playSfx('pop')}
-            style={{
-              position: 'absolute',
-              top: 'clamp(26px, 4.5vh, 55px)',
-              right: 'clamp(140px, 14vw, 220px)',
-              width: 'clamp(52px, 4.5vw, 70px)',
-              height: 'auto',
-              zIndex: 6
-            }}
-          />
-          <img
-            src="/logos/cpp-comic.png"
-            alt="C++"
-            title="C++"
-            className="comic-tech-logo comic-tech-logo-cpp float-logo-2"
-            onMouseEnter={() => playSfx('pop')}
-            style={{
-              position: 'absolute',
-              top: 'clamp(48px, 7.5vh, 85px)',
-              right: 'clamp(25px, 3.2vw, 55px)',
-              width: 'clamp(50px, 4.2vw, 66px)',
-              height: 'auto',
-              zIndex: 6
-            }}
-          />
-          <img
-            src="/logos/django-comic.png"
-            alt="Django"
-            title="Django"
-            className="comic-tech-logo comic-tech-logo-django float-logo-5"
-            onMouseEnter={() => playSfx('pop')}
-            style={{
-              position: 'absolute',
-              top: 'clamp(70px, 10vh, 105px)',
-              right: 'clamp(260px, 22vw, 340px)',
-              width: 'clamp(68px, 5.8vw, 92px)',
-              height: 'auto',
-              zIndex: 6
-            }}
-          />
-          <img
-            src="/logos/python-comic.png"
-            alt="Python"
-            title="Python"
-            className="comic-tech-logo comic-tech-logo-python float-logo-3"
-            onMouseEnter={() => playSfx('pop')}
-            style={{
-              position: 'absolute',
-              top: 'clamp(56%, 58vh, 66%)',
-              right: 'clamp(160px, 16vw, 240px)',
-              width: 'clamp(50px, 4.2vw, 68px)',
-              height: 'auto',
-              zIndex: 6
-            }}
-          />
-          <img
-            src="/logos/aws-comic.png"
-            alt="AWS"
-            title="Amazon Web Services"
-            className="comic-tech-logo comic-tech-logo-aws float-logo-4"
-            onMouseEnter={() => playSfx('pop')}
-            style={{
-              position: 'absolute',
-              top: 'clamp(48%, 51vh, 55%)',
-              right: 'clamp(38px, 4.2vw, 70px)',
-              width: 'clamp(60px, 5.2vw, 80px)',
-              height: 'auto',
-              zIndex: 6
             }}
           />
 
@@ -723,6 +649,7 @@ export default function MatHero() {
         >
           {/* Yellow Doodle Crown (LOCKED DIRECTLY TO ARUN'S HAIR) */}
           <div 
+            className="hero-avatar-crown"
             style={{ 
               position: 'absolute', 
               top: 'clamp(-36px, -4vh, -22px)', 
@@ -901,6 +828,83 @@ export default function MatHero() {
             <path d="M 1060, 230 C 1110, 240 1155, 232 1180, 218" stroke="#0C0E0F" strokeWidth="2.6" strokeLinecap="round" fill="none" opacity="0.6" />
           </svg>
         </div>
+
+        {/* ── FLOATING COMIC TECH LOGOS (ACTIVE IN BOTH DESKTOP & MOBILE SPREADS) ── */}
+        <img
+          src="/logos/react-comic.png"
+          alt="React"
+          title="React.js"
+          className="comic-tech-logo comic-tech-logo-react float-logo-1"
+          onMouseEnter={() => playSfx('pop')}
+          style={{
+            position: 'absolute',
+            top: 'clamp(26px, 4.5vh, 55px)',
+            right: 'clamp(140px, 14vw, 220px)',
+            width: 'clamp(52px, 4.5vw, 70px)',
+            height: 'auto',
+            zIndex: 26
+          }}
+        />
+        <img
+          src="/logos/cpp-comic.png"
+          alt="C++"
+          title="C++"
+          className="comic-tech-logo comic-tech-logo-cpp float-logo-2"
+          onMouseEnter={() => playSfx('pop')}
+          style={{
+            position: 'absolute',
+            top: 'clamp(48px, 7.5vh, 85px)',
+            right: 'clamp(25px, 3.2vw, 55px)',
+            width: 'clamp(50px, 4.2vw, 66px)',
+            height: 'auto',
+            zIndex: 26
+          }}
+        />
+        <img
+          src="/logos/django-comic.png"
+          alt="Django"
+          title="Django"
+          className="comic-tech-logo comic-tech-logo-django float-logo-5"
+          onMouseEnter={() => playSfx('pop')}
+          style={{
+            position: 'absolute',
+            top: 'clamp(70px, 10vh, 105px)',
+            right: 'clamp(260px, 22vw, 340px)',
+            width: 'clamp(68px, 5.8vw, 92px)',
+            height: 'auto',
+            zIndex: 26
+          }}
+        />
+        <img
+          src="/logos/python-comic.png"
+          alt="Python"
+          title="Python"
+          className="comic-tech-logo comic-tech-logo-python float-logo-3"
+          onMouseEnter={() => playSfx('pop')}
+          style={{
+            position: 'absolute',
+            top: 'clamp(56%, 58vh, 66%)',
+            right: 'clamp(160px, 16vw, 240px)',
+            width: 'clamp(50px, 4.2vw, 68px)',
+            height: 'auto',
+            zIndex: 26
+          }}
+        />
+        <img
+          src="/logos/aws-comic.png"
+          alt="AWS"
+          title="Amazon Web Services"
+          className="comic-tech-logo comic-tech-logo-aws float-logo-4"
+          onMouseEnter={() => playSfx('pop')}
+          style={{
+            position: 'absolute',
+            top: 'clamp(48%, 51vh, 55%)',
+            right: 'clamp(38px, 4.2vw, 70px)',
+            width: 'clamp(60px, 5.2vw, 80px)',
+            height: 'auto',
+            zIndex: 26
+          }}
+        />
       </div>
     </section>
   );
