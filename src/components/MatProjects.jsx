@@ -348,37 +348,6 @@ export default function MatProjects() {
                   flex: 1
                 }}
               >
-                {/* Number + Badge */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2px' }}>
-                  <span 
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.75rem',
-                      fontWeight: 700,
-                      color: 'var(--ink)'
-                    }}
-                  >
-                    // PROJECT {proj.number}
-                  </span>
-                  <span 
-                    style={{
-                      padding: '2px 8px',
-                      fontFamily: 'var(--font-tape)',
-                      fontSize: '0.7rem',
-                      letterSpacing: '0.04em',
-                      textTransform: 'uppercase',
-                      color: 'var(--ink)',
-                      background: proj.badgeColor,
-                      border: '2px solid var(--ink)',
-                      borderRadius: '6px',
-                      boxShadow: '2px 2px 0 var(--ink)',
-                      fontWeight: 700
-                    }}
-                  >
-                    {proj.badge}
-                  </span>
-                </div>
-
                 {/* Project Title */}
                 <h3 
                   className="project-card-title"
