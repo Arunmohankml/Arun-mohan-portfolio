@@ -39,45 +39,47 @@ export default function MatFAQ() {
       <TapeDivider text="FREQUENTLY ASKED QUESTIONS ★ GOT QUESTIONS? WE GOT COMIC ANSWERS" tilt="tilt-right" white={true} />
 
       <section className="section section--faq pattern pattern--asterisk" id="faq">
-        <div className="section-head section-head--center" style={{ color: 'var(--white)' }}>
-          <h2 className="display display--heading" style={{ color: 'var(--white)' }}>
-            FREQUENTLY ASKED
-          </h2>
-          <p className="section-lead" style={{ color: 'var(--white)' }}>
-            Everything you wanted to know about Arun Mohan K’s engineering philosophy, toolchains, and availability.
-          </p>
-        </div>
+        <div className="section__inner section__inner--narrow">
+          <div className="section-head section-head--center" style={{ color: 'var(--white)' }}>
+            <h2 className="display display--heading" style={{ color: 'var(--white)' }}>
+              FREQUENTLY ASKED
+            </h2>
+            <p className="section-lead" style={{ color: 'var(--white)' }}>
+              Everything you wanted to know about Arun Mohan K’s engineering philosophy, toolchains, and availability.
+            </p>
+          </div>
 
-        <div className="faq" style={{ maxWidth: '840px', margin: '0 auto' }}>
-          {FAQS.map((item, idx) => {
-            const isOpen = openIndex === idx;
-            return (
-              <details
-                key={idx}
-                className="faq__item"
-                open={isOpen}
-                onClick={(e) => {
-                  e.preventDefault();
-                  toggleFAQ(idx);
-                }}
-              >
-                <summary>
-                  <span>{item.q}</span>
-                </summary>
-                <div className="faq__body">
-                  <p style={{
-                    fontSize: '1rem',
-                    lineHeight: 1.55,
-                    color: 'var(--ink)',
-                    margin: 0,
-                    fontWeight: 500
-                  }}>
-                    {item.a}
-                  </p>
-                </div>
-              </details>
-            );
-          })}
+          <div className="faq" style={{ maxWidth: '840px', margin: '0 auto' }}>
+            {FAQS.map((item, idx) => {
+              const isOpen = openIndex === idx;
+              return (
+                <details
+                  key={idx}
+                  className="faq__item"
+                  open={isOpen}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleFAQ(idx);
+                  }}
+                >
+                  <summary>
+                    <span>{item.q}</span>
+                  </summary>
+                  <div className="faq__body">
+                    <p style={{
+                      fontSize: '1rem',
+                      lineHeight: 1.55,
+                      color: 'var(--ink)',
+                      margin: 0,
+                      fontWeight: 500
+                    }}>
+                      {item.a}
+                    </p>
+                  </div>
+                </details>
+              );
+            })}
+          </div>
         </div>
       </section>
     </>

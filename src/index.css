@@ -970,4 +970,42 @@
     font-size: 0.84rem !important;
     letter-spacing: 0.04em !important;
   }
+
+  /* 4. FAQ MOBILE POLISH: SLIGHTLY SMALLER FONT & MINUTE BREATHING GAP FROM SCREEN EDGES */
+  .section--faq {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .section--faq .faq {
+    padding: 0 4px !important;
+    gap: 12px !important;
+  }
+
+  .faq__item {
+    border-radius: 14px !important;
+    box-shadow: 4px 4px 0 var(--ink) !important;
+  }
+
+  .faq__item summary {
+    padding: 13px 14px 13px 16px !important;
+    font-size: 0.94rem !important;
+    line-height: 1.25 !important;
+    gap: 12px !important;
+  }
+
+  .faq__item summary::after {
+    width: 32px !important;
+    height: 32px !important;
+    background-size: 13px 3.5px, 3.5px 13px !important;
+  }
+
+  .faq__body {
+    padding: 14px 16px 16px !important;
+  }
+
+  .faq__body p {
+    font-size: 0.88rem !important;
+    line-height: 1.5 !important;
+  }
 }
