@@ -205,7 +205,7 @@ function HackathonCard({ h, playSfx }) {
   return (
     <div
       onMouseEnter={() => playSfx('pop')}
-      className="hack-card-hover"
+      className="hackathon-card hack-card-hover"
       style={{
         background: '#FFFFFF',
         border: '3.5px solid #0C0E0F',
@@ -220,6 +220,7 @@ function HackathonCard({ h, playSfx }) {
     >
       {/* Top Header Row: Status Badge (Black) + Date Badge */}
       <div
+        className="hackathon-card-header"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -228,6 +229,7 @@ function HackathonCard({ h, playSfx }) {
         }}
       >
         <div
+          className="hackathon-card-badge"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -247,6 +249,7 @@ function HackathonCard({ h, playSfx }) {
         </div>
 
         <div
+          className="hackathon-card-badge"
           style={{
             display: 'inline-block',
             background: h.dateBg,
@@ -267,6 +270,7 @@ function HackathonCard({ h, playSfx }) {
 
       {/* Main Content: Left Image/Graphic + Right Details */}
       <div
+        className="hackathon-card-content"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -275,11 +279,14 @@ function HackathonCard({ h, playSfx }) {
         }}
       >
         {/* Left Graphic Thumbnail */}
-        {renderCardGraphic(h.type)}
+        <div className="hackathon-card-graphic flex-shrink-0">
+          {renderCardGraphic(h.type)}
+        </div>
 
         {/* Right Info Column */}
         <div style={{ flex: 1, minWidth: 0 }}>
           <h3
+            className="hackathon-card-title"
             style={{
               fontFamily: 'var(--font-tape)',
               fontSize: 'clamp(1.15rem, 1.4vw, 1.35rem)',
@@ -293,6 +300,7 @@ function HackathonCard({ h, playSfx }) {
 
           {h.kicker && (
             <div
+              className="hackathon-card-kicker"
               style={{
                 color: '#EF4225',
                 fontFamily: 'var(--font-tape)',
@@ -308,6 +316,7 @@ function HackathonCard({ h, playSfx }) {
           )}
 
           <div
+            className="hackathon-card-location"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -324,6 +333,7 @@ function HackathonCard({ h, playSfx }) {
           </div>
 
           <p
+            className="hackathon-card-desc"
             style={{
               color: '#374151',
               fontSize: '0.82rem',
@@ -339,6 +349,7 @@ function HackathonCard({ h, playSfx }) {
 
       {/* Footer Row */}
       <div
+        className="hackathon-card-footer"
         style={{
           borderTop: '2px solid #E5E7EB',
           paddingTop: '10px',
@@ -579,23 +590,16 @@ export default function MatHackathons() {
           </h2>
         </div>
 
-        {/* ── HACKATHONS CARDS: TOP 3, BOTTOM 2 CENTERED ── */}
+        {/* ── HACKATHONS CARDS: TOP 3, BOTTOM 2 ON DESKTOP & EXACT 2 CARDS IN A ROW ON MOBILE ── */}
+        {/* Desktop View (>= 860px) */}
         <div
-          style={{
-            position: 'relative',
-            zIndex: 3,
-            maxWidth: '1240px',
-            margin: '0 auto',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '24px'
-          }}
+          className="hidden md:flex flex-col gap-6 w-full max-w-[1240px] mx-auto relative z-[3]"
         >
           {/* Row 1: Top 3 Cards */}
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))',
+              gridTemplateColumns: 'repeat(3, 1fr)',
               gap: '24px',
               justifyContent: 'center'
             }}
@@ -609,7 +613,7 @@ export default function MatHackathons() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 350px), 1fr))',
+              gridTemplateColumns: 'repeat(2, 1fr)',
               gap: '24px',
               maxWidth: '820px',
               margin: '0 auto',
@@ -621,6 +625,18 @@ export default function MatHackathons() {
               <HackathonCard key={idx + 3} h={h} playSfx={playSfx} />
             ))}
           </div>
+        </div>
+
+        {/* Mobile View (< 860px): Exact 2 Cards in a Row */}
+        <div className="md:hidden hackathons-cards-grid relative z-[3]">
+          {HACKATHONS_DATA.map((h, idx) => (
+            <div 
+              key={idx} 
+              className={idx === 4 ? "col-span-2 max-w-[280px] mx-auto w-full" : "w-full"}
+            >
+              <HackathonCard h={h} playSfx={playSfx} />
+            </div>
+          ))}
         </div>
       </section>
     </>

@@ -147,7 +147,9 @@ export default function MatProjects() {
         </div>
 
         {/* 3x2 Clean Grid of Project Boxes */}
+        {/* ── PROJECTS CARDS GRID (RESPONSIVE 2 CARDS IN A ROW ON MOBILE) ── */}
         <div 
+          className="projects-cards-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))',
@@ -158,7 +160,7 @@ export default function MatProjects() {
           {PROJECTS.map((proj) => (
             <div
               key={proj.id}
-              className="group"
+              className="project-card group"
               style={{
                 background: 'var(--white)',
                 border: '3.5px solid var(--ink)',
@@ -174,7 +176,7 @@ export default function MatProjects() {
             >
               {/* Top: Browser Mock Window with Screenshot Preview */}
               <div 
-                className="relative overflow-hidden" 
+                className="project-mock-window relative overflow-hidden" 
                 style={{
                   height: '240px',
                   borderBottom: '3.5px solid var(--ink)',
@@ -337,6 +339,7 @@ export default function MatProjects() {
 
               {/* Bottom: Title & Project Metadata (Below the Box) */}
               <div 
+                className="project-card-body"
                 style={{
                   padding: '20px 22px 22px',
                   display: 'flex',
@@ -378,6 +381,7 @@ export default function MatProjects() {
 
                 {/* Project Title */}
                 <h3 
+                  className="project-card-title"
                   style={{
                     fontFamily: 'var(--font-display)',
                     fontSize: '1.45rem',
@@ -392,6 +396,7 @@ export default function MatProjects() {
 
                 {/* Short Description */}
                 <p 
+                  className="project-card-desc"
                   style={{
                     fontSize: '0.9rem',
                     lineHeight: 1.45,
@@ -404,7 +409,7 @@ export default function MatProjects() {
                 </p>
 
                 {/* Tech Pills */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: 'auto', paddingTop: '8px', borderTop: '1.5px dashed rgba(12,14,15,0.2)' }}>
+                <div className="project-card-tags" style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: 'auto', paddingTop: '8px', borderTop: '1.5px dashed rgba(12,14,15,0.2)' }}>
                   {proj.tags.map((tag) => (
                     <span 
                       key={tag}
@@ -422,6 +427,28 @@ export default function MatProjects() {
                       {tag}
                     </span>
                   ))}
+                </div>
+
+                {/* Mobile direct action buttons */}
+                <div className="flex sm:hidden items-center gap-1.5 pt-2 mt-auto">
+                  <a
+                    href={proj.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-1 px-1.5 text-[10px] font-bold text-center bg-white border border-[#0C0E0F] rounded shadow-[1.5px_1.5px_0px_#0C0E0F] uppercase"
+                    onClick={(e) => { e.stopPropagation(); playSfx('pop'); }}
+                  >
+                    CODE →
+                  </a>
+                  <a
+                    href={proj.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-1 px-1.5 text-[10px] font-bold text-center bg-[#FF2A5F] text-white border border-[#0C0E0F] rounded shadow-[1.5px_1.5px_0px_#0C0E0F] uppercase"
+                    onClick={(e) => { e.stopPropagation(); playSfx('pow'); }}
+                  >
+                    LIVE →
+                  </a>
                 </div>
               </div>
             </div>

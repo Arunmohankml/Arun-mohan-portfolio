@@ -291,8 +291,9 @@ export default function MatCreator() {
 
           {/* 3 Instagram Reel Video Thumbnails (Non-stretched 9:16 ratio) */}
           <div style={{ marginTop: '0px' }}>
-            {/* 3-Column Video Grid */}
+            {/* 3-Column Video Grid (Responsive 2 Cards in a Row on Mobile) */}
             <div 
+              className="creator-reels-grid"
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',

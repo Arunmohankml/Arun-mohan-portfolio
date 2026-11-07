@@ -102,6 +102,7 @@ export default function MatHero() {
       >
         {/* ── LEFT PANEL: GOLDEN YELLOW SUNBURST ── */}
         <div
+          className="hero-panel-orange"
           style={{
             position: 'relative',
             overflow: 'hidden',
@@ -184,6 +185,7 @@ export default function MatHero() {
 
           {/* "HI, I'M" Speech Pill */}
           <div 
+            className="hero-speech-pill"
             style={{ 
               zIndex: 4,
               position: 'relative',
@@ -239,6 +241,7 @@ export default function MatHero() {
           {/* Hero Title: ARUN MOHAN K. */}
           <h1 
             id="hero-title" 
+            className="hero-title"
             style={{ 
               fontFamily: 'var(--font-display), "Bangers", cursive, sans-serif', 
               fontSize: 'clamp(3.8rem, 6.8vw, 7rem)', 
@@ -260,6 +263,7 @@ export default function MatHero() {
 
           {/* Subtitle Banner Box: FULL-STACK ARCHITECT & CLOUD ENGINEER */}
           <div 
+            className="hero-subtitle-box"
             style={{ 
               background: '#FFFFFF', 
               border: '4px solid #0C0E0F', 
@@ -274,6 +278,7 @@ export default function MatHero() {
             }}
           >
             <div 
+              className="hero-subtitle-text"
               style={{ 
                 fontFamily: 'var(--font-display), "Bangers", cursive, sans-serif', 
                 fontSize: 'clamp(1.35rem, 2.1vw, 1.95rem)', 
@@ -290,6 +295,7 @@ export default function MatHero() {
 
           {/* Tagline */}
           <p 
+            className="hero-tagline"
             style={{ 
               fontFamily: 'var(--font-tape)', 
               fontSize: 'clamp(1.08rem, 1.45vw, 1.35rem)', 
@@ -307,6 +313,7 @@ export default function MatHero() {
 
           {/* Action Buttons Row */}
           <div 
+            className="hero-buttons-row"
             style={{ 
               display: 'flex', 
               alignItems: 'center', 
@@ -459,6 +466,7 @@ export default function MatHero() {
 
         {/* ── RIGHT PANEL: DEEP COMIC BLUE WITH CODE WINDOW ── */}
         <div
+          className="hero-panel-blue"
           style={{
             position: 'relative',
             overflow: 'hidden',
@@ -497,7 +505,7 @@ export default function MatHero() {
             src="/logos/react-comic.png"
             alt="React"
             title="React.js"
-            className="comic-tech-logo float-logo-1"
+            className="comic-tech-logo comic-tech-logo-react float-logo-1"
             onMouseEnter={() => playSfx('pop')}
             style={{
               position: 'absolute',
@@ -512,7 +520,7 @@ export default function MatHero() {
             src="/logos/cpp-comic.png"
             alt="C++"
             title="C++"
-            className="comic-tech-logo float-logo-2"
+            className="comic-tech-logo comic-tech-logo-cpp float-logo-2"
             onMouseEnter={() => playSfx('pop')}
             style={{
               position: 'absolute',
@@ -527,7 +535,7 @@ export default function MatHero() {
             src="/logos/django-comic.png"
             alt="Django"
             title="Django"
-            className="comic-tech-logo float-logo-5"
+            className="comic-tech-logo comic-tech-logo-django float-logo-5"
             onMouseEnter={() => playSfx('pop')}
             style={{
               position: 'absolute',
@@ -542,7 +550,7 @@ export default function MatHero() {
             src="/logos/python-comic.png"
             alt="Python"
             title="Python"
-            className="comic-tech-logo float-logo-3"
+            className="comic-tech-logo comic-tech-logo-python float-logo-3"
             onMouseEnter={() => playSfx('pop')}
             style={{
               position: 'absolute',
@@ -557,7 +565,7 @@ export default function MatHero() {
             src="/logos/aws-comic.png"
             alt="AWS"
             title="Amazon Web Services"
-            className="comic-tech-logo float-logo-4"
+            className="comic-tech-logo comic-tech-logo-aws float-logo-4"
             onMouseEnter={() => playSfx('pop')}
             style={{
               position: 'absolute',
@@ -654,6 +662,7 @@ export default function MatHero() {
 
           {/* ── "LET'S BUILD SOMETHING GREAT!" (BOTTOM-RIGHT) ── */}
           <div
+            className="hero-slogan-box"
             style={{
               position: 'absolute',
               right: 'clamp(20px, 3.5vw, 55px)',
@@ -790,6 +799,7 @@ export default function MatHero() {
 
         {/* ── COMIC PUFFY CLOUDS (ORGANIC CUMULUS BANK WITH NATURAL BILLOWS, 3D DEPTH & COMIC INKING) ── */}
         <div
+          className="hero-cloud-bank"
           style={{
             position: 'absolute',
             bottom: 'clamp(-85px, -10vh, -65px)',
