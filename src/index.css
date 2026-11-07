@@ -926,11 +926,48 @@
     display: none !important;
   }
 
-  /* 3. CREATOR REELS GRID: EXACT 2 CARDS IN A ROW */
+  /* 3. CREATOR REELS: ONE ROW, SCROLLABLE WITH WIDER CARDS & FADED SIDES ON MOBILE */
+  .creator-reels-carousel-wrapper {
+    position: relative !important;
+    margin: 0 -16px !important; /* Bleed to screen edges for smooth scrolling */
+    padding: 0 !important;
+    overflow: hidden !important;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent 100%) !important;
+    mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent 100%) !important;
+  }
+
   .creator-reels-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 10px !important;
-    padding: 0 4px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 16px !important;
+    padding: 8px 24px 20px 24px !important;
+    scrollbar-width: none !important;
+  }
+  .creator-reels-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .creator-reel-card {
+    flex: 0 0 72vw !important; /* Wider cards */
+    max-width: 290px !important;
+    scroll-snap-align: center !important;
+    border-radius: 18px !important;
+    box-shadow: 5px 5px 0 var(--ink) !important;
+  }
+
+  .creator-reel-bottom-bar {
+    padding: 10px 12px !important;
+  }
+
+  .creator-reel-watch-btn {
+    width: 100% !important;
+    padding: 9px 14px !important;
+    font-size: 0.84rem !important;
+    letter-spacing: 0.04em !important;
   }
 }

@@ -290,8 +290,8 @@ export default function MatCreator() {
           </div>
 
           {/* 3 Instagram Reel Video Thumbnails (Non-stretched 9:16 ratio) */}
-          <div style={{ marginTop: '0px' }}>
-            {/* 3-Column Video Grid (Responsive 2 Cards in a Row on Mobile) */}
+          <div className="creator-reels-carousel-wrapper" style={{ marginTop: '0px', position: 'relative' }}>
+            {/* 3-Column Video Grid on Desktop / Smooth 1-Row Carousel with Faded Edges on Mobile */}
             <div 
               className="creator-reels-grid"
               style={{
@@ -304,6 +304,7 @@ export default function MatCreator() {
               {INSTA_VIDEOS.map((video) => (
                 <div
                   key={video.id}
+                  className="creator-reel-card group hover:-translate-y-1.5 hover:shadow-[8px_8px_0px_#0C0E0F]"
                   style={{
                     background: '#0C0E0F',
                     border: '3.5px solid var(--ink)',
@@ -314,7 +315,6 @@ export default function MatCreator() {
                     flexDirection: 'column',
                     transition: 'transform 0.18s ease, box-shadow 0.18s ease'
                   }}
-                  className="group hover:-translate-y-1.5 hover:shadow-[8px_8px_0px_#0C0E0F]"
                 >
                   {/* Clean 9:16 Reel Thumbnail (No white Instagram embed chrome) */}
                   <a
@@ -408,8 +408,9 @@ export default function MatCreator() {
                     </div>
                   </a>
 
-                  {/* Bottom Dark Bar: Category Tag & Instagram Link */}
+                  {/* Bottom Dark Bar: Instagram Link (Clean, fully visible watch button) */}
                   <div
+                    className="creator-reel-bottom-bar"
                     style={{
                       padding: '12px 14px',
                       background: '#0C0E0F',
@@ -417,44 +418,28 @@ export default function MatCreator() {
                       marginTop: 'auto',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'space-between',
-                      gap: '10px'
+                      justifyContent: 'center'
                     }}
                   >
-                    <span 
-                      style={{
-                        padding: '5px 12px',
-                        background: '#FFE23A',
-                        color: '#0C0E0F',
-                        borderRadius: '999px',
-                        fontFamily: 'var(--font-tape)',
-                        fontSize: '0.78rem',
-                        letterSpacing: '0.04em',
-                        textTransform: 'uppercase',
-                        fontWeight: 700,
-                        whiteSpace: 'nowrap'
-                      }}
-                    >
-                      {video.icon} {video.category}
-                    </span>
-
                     <a
                       href={video.url}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="creator-reel-watch-btn"
                       style={{
                         display: 'inline-flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         gap: '6px',
-                        padding: '8px 14px',
+                        width: '100%',
+                        padding: '10px 14px',
                         background: '#E1306C',
                         color: '#FFFFFF',
                         fontFamily: 'var(--font-tape)',
-                        fontSize: '0.82rem',
-                        borderRadius: '8px',
-                        border: '2px solid #0C0E0F',
-                        boxShadow: '2px 2px 0 #000',
+                        fontSize: '0.86rem',
+                        borderRadius: '999px',
+                        border: '2.5px solid #0C0E0F',
+                        boxShadow: '2.5px 2.5px 0 #000',
                         textDecoration: 'none',
                         whiteSpace: 'nowrap'
                       }}
