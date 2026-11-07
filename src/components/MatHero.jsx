@@ -786,32 +786,7 @@ export default function MatHero() {
           </svg>
         </div>
 
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 'clamp(130px, 18vh, 210px)',
-            right: 'clamp(30px, 6vw, 110px)',
-            zIndex: 16,
-            pointerEvents: 'none'
-          }}
-          className="float-logo-4"
-          aria-hidden="true"
-        >
-          <svg width="98" height="52" viewBox="0 0 98 52" fill="none" style={{ filter: 'drop-shadow(3px 3px 0 #0C0E0F)' }}>
-            <path
-              d="M 22,42 C 10,42 4,32 9,22 C 14,12 28,10 35,17 C 41,6 59,6 66,15 C 73,10 85,15 88,24 C 97,29 96,42 83,43 C 68,44 34,44 22,42 Z"
-              fill="#FFFFFF"
-              stroke="#0C0E0F"
-              strokeWidth="3.2"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M 22,42 C 34,44 68,44 83,43 C 96,42 97,29 88,24 C 82,32 65,39 38,39 C 26,39 17,40 22,42 Z"
-              fill="#BAE6FD"
-              opacity="0.8"
-            />
-          </svg>
-        </div>
+
 
         {/* ── COMIC PUFFY CLOUDS (ORGANIC CUMULUS BANK WITH NATURAL BILLOWS, 3D DEPTH & COMIC INKING) ── */}
         <div
