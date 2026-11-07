@@ -146,6 +146,7 @@ export default function MatHero() {
 
           {/* Explosive "M" Star Badge (Top-Left) */}
           <div 
+            className="hero-m-badge"
             style={{ 
               position: 'absolute', 
               top: 'clamp(14px, 2.2vh, 26px)', 
@@ -703,7 +704,7 @@ export default function MatHero() {
             zIndex: 16,
             pointerEvents: 'none'
           }}
-          className="float-logo-2"
+          className="hero-mini-cloud float-logo-2"
           aria-hidden="true"
         >
           <svg width="84" height="46" viewBox="0 0 84 46" fill="none" style={{ filter: 'drop-shadow(3px 3px 0 #0C0E0F)' }}>
