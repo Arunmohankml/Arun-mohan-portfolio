@@ -430,7 +430,7 @@ export default function MatProjects() {
             href="https://github.com/Arunmohankml"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn--pop"
+            className="btn btn--pop projects-all-github-btn"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -446,8 +446,9 @@ export default function MatProjects() {
             }}
             onClick={() => playSfx('pow')}
           >
-            <Github className="w-6 h-6" />
-            <span>SHOW ALL PROJECTS ON GITHUB →</span>
+            <Github className="w-5 h-5 projects-github-icon" />
+            <span className="hidden md:inline">SHOW ALL PROJECTS ON GITHUB →</span>
+            <span className="inline md:hidden">Github →</span>
           </a>
           <p 
             style={{

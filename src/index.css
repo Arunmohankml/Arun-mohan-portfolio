@@ -926,6 +926,19 @@
     display: none !important;
   }
 
+  /* Compact Github button on mobile */
+  .projects-all-github-btn {
+    padding: 10px 20px !important;
+    font-size: 0.95rem !important;
+    border-width: 2.5px !important;
+    box-shadow: 4px 4px 0 var(--ink) !important;
+    gap: 8px !important;
+  }
+  .projects-github-icon {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
   /* 3. CREATOR REELS: ONE ROW, SCROLLABLE WITH WIDER CARDS & FADED SIDES ON MOBILE */
   .creator-reels-carousel-wrapper {
     position: relative !important;
