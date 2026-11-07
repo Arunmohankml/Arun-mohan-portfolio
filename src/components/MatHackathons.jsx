@@ -218,56 +218,6 @@ function HackathonCard({ h, playSfx }) {
         position: 'relative'
       }}
     >
-      {/* Top Header Row: Status Badge (Black) + Date Badge */}
-      <div
-        className="hackathon-card-header"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginBottom: '14px'
-        }}
-      >
-        <div
-          className="hackathon-card-badge"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            background: '#0C0E0F',
-            color: '#FFFFFF',
-            fontFamily: 'var(--font-tape)',
-            fontSize: '0.74rem',
-            letterSpacing: '0.05em',
-            textTransform: 'uppercase',
-            padding: '4px 12px',
-            borderRadius: '999px'
-          }}
-        >
-          <span style={{ color: '#FFE23A', fontSize: '0.85rem' }}>⚡</span>
-          <span>PARTICIPANT</span>
-        </div>
-
-        <div
-          className="hackathon-card-badge"
-          style={{
-            display: 'inline-block',
-            background: h.dateBg,
-            color: h.dateColor,
-            fontFamily: 'var(--font-tape)',
-            fontSize: '0.74rem',
-            letterSpacing: '0.05em',
-            textTransform: 'uppercase',
-            padding: '4px 14px',
-            borderRadius: '999px',
-            border: '2px solid #0C0E0F',
-            boxShadow: '2px 2px 0 #0C0E0F'
-          }}
-        >
-          {h.date}
-        </div>
-      </div>
-
       {/* Main Content: Left Image/Graphic + Right Details */}
       <div
         className="hackathon-card-content"
@@ -284,7 +234,7 @@ function HackathonCard({ h, playSfx }) {
         </div>
 
         {/* Right Info Column */}
-        <div style={{ flex: 1, minWidth: 0 }}>
+        <div className="hackathon-card-info" style={{ flex: 1, minWidth: 0, width: '100%', maxWidth: '100%' }}>
           <h3
             className="hackathon-card-title"
             style={{
@@ -329,7 +279,7 @@ function HackathonCard({ h, playSfx }) {
             }}
           >
             <span style={{ color: '#EF4225', fontStyle: 'normal' }}>📍</span>
-            <span className="truncate">{h.location}</span>
+            <span className="truncate" style={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{h.location}</span>
           </div>
 
           <p
@@ -632,9 +582,11 @@ export default function MatHackathons() {
           {HACKATHONS_DATA.map((h, idx) => (
             <div 
               key={idx} 
-              className={idx === 4 ? "col-span-2 max-w-[280px] mx-auto w-full" : "w-full"}
+              className={idx === 4 ? "col-span-2 flex justify-center w-full" : "w-full h-full"}
             >
-              <HackathonCard h={h} playSfx={playSfx} />
+              <div className={idx === 4 ? "w-[calc(50%-5px)] h-full" : "w-full h-full"}>
+                <HackathonCard h={h} playSfx={playSfx} />
+              </div>
             </div>
           ))}
         </div>
