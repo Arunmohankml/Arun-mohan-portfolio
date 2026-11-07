@@ -263,9 +263,9 @@ export default function MatProjects() {
                   />
                 </div>
 
-                {/* Hover Overlay with Action Buttons */}
+                {/* Hover Overlay with Action Buttons (Desktop Only - on mobile the bottom CODE & LIVE buttons are used) */}
                 <div 
-                  className="absolute inset-0 bg-black/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-3 p-4 z-20"
+                  className="project-card-hover-overlay absolute inset-0 bg-black/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-3 p-4 z-20 pointer-events-none group-hover:pointer-events-auto"
                   style={{ top: '37px' }}
                 >
                   <span 

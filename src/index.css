@@ -896,6 +896,12 @@
     height: 115px !important;
   }
 
+  /* Disable hover/tap overlay on mobile so tapping image does nothing */
+  .project-card-hover-overlay {
+    display: none !important;
+    pointer-events: none !important;
+  }
+
   .project-card-body {
     padding: 10px 8px !important;
     gap: 5px !important;
