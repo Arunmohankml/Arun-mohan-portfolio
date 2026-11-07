@@ -60,22 +60,28 @@ export default function MatContactFooter() {
           </p>
         </div>
 
-        <div style={{
-          maxWidth: '920px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 360px), 1fr))',
-          gap: '30px',
-          alignItems: 'start'
-        }}>
+        <div 
+          className="contact-cards-container"
+          style={{
+            maxWidth: '920px',
+            margin: '0 auto',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 360px), 1fr))',
+            gap: '30px',
+            alignItems: 'start'
+          }}
+        >
           {/* Left Info Card */}
-          <div style={{
-            background: 'var(--white)',
-            border: 'var(--line) solid var(--ink)',
-            borderRadius: '20px',
-            padding: '30px',
-            boxShadow: '8px 8px 0 var(--ink)'
-          }}>
+          <div 
+            className="contact-card"
+            style={{
+              background: 'var(--white)',
+              border: 'var(--line) solid var(--ink)',
+              borderRadius: '20px',
+              padding: '30px',
+              boxShadow: '8px 8px 0 var(--ink)'
+            }}
+          >
             <span style={{
               display: 'inline-block',
               padding: '4px 12px',
@@ -197,13 +203,16 @@ export default function MatContactFooter() {
           </div>
 
           {/* Right: Contact Form */}
-          <div style={{
-            background: 'var(--paper)',
-            border: 'var(--line) solid var(--ink)',
-            borderRadius: '20px',
-            padding: '30px',
-            boxShadow: '8px 8px 0 var(--ink)'
-          }}>
+          <div 
+            className="contact-card"
+            style={{
+              background: 'var(--paper)',
+              border: 'var(--line) solid var(--ink)',
+              borderRadius: '20px',
+              padding: '30px',
+              boxShadow: '8px 8px 0 var(--ink)'
+            }}
+          >
             {submitted ? (
               <div style={{ textAlign: 'center', padding: '40px 20px' }}>
                 <div style={{ fontSize: '3.5rem', marginBottom: '10px' }}>💥</div>

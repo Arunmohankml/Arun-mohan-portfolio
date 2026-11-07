@@ -973,8 +973,14 @@
 
   /* 4. FAQ MOBILE POLISH: SLIGHTLY SMALLER FONT & MINUTE BREATHING GAP FROM SCREEN EDGES */
   .section--faq {
-    padding-left: 10px !important;
-    padding-right: 10px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .section--faq .section__inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 4px !important;
   }
 
   .section--faq .faq {
@@ -985,6 +991,8 @@
   .faq__item {
     border-radius: 14px !important;
     box-shadow: 4px 4px 0 var(--ink) !important;
+    margin-left: 2px !important;
+    margin-right: 2px !important;
   }
 
   .faq__item summary {
@@ -1007,5 +1015,24 @@
   .faq__body p {
     font-size: 0.88rem !important;
     line-height: 1.5 !important;
+  }
+
+  /* 5. CONTACT / GET IN TOUCH MOBILE POLISH: MINUTE 2-3px SIDE GAP */
+  #contact {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .contact-cards-container {
+    padding: 0 4px !important;
+    gap: 20px !important;
+  }
+
+  .contact-card {
+    border-radius: 16px !important;
+    box-shadow: 5px 5px 0 var(--ink) !important;
+    padding: 20px 16px !important;
+    margin-left: 2px !important;
+    margin-right: 2px !important;
   }
 }
