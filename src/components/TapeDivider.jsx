@@ -9,7 +9,7 @@ export default function TapeDivider({
 
   return (
     <div 
-      className="relative w-full select-none pointer-events-none" 
+      className="tape-divider-wrapper relative w-full select-none pointer-events-none" 
       style={{ 
         height: 0, 
         zIndex: 25,
