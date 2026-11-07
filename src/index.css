@@ -1051,11 +1051,15 @@
 
   /* 6. EXTRA TOP BREATHING GAP FOR MARQUEE TAPE DIVIDERS ON MOBILE */
   .tape-divider-wrapper {
-    margin-top: 32px !important;
+    margin-top: 36px !important;
   }
 
-  /* Additional breathing space at the bottom of the 3D book section */
+  /* Additional breathing space at the bottom of the 3D book and Hackathons sections */
   .section--timeline {
-    padding-bottom: 28px !important;
+    padding-bottom: 30px !important;
+  }
+
+  #hackathons {
+    padding-bottom: 44px !important;
   }
 }
